@@ -24,7 +24,7 @@ export default function Marquee() {
         <div className="flex whitespace-nowrap animate-marquee-reverse">
           {[...Array(4)].map((_, i) => (
             <div key={i} className="flex items-center">
-              {items.reverse().map((item, j) => (
+              {[...items].reverse().map((item, j) => (
                 <div key={j} className="flex items-center mx-[2rem]">
                   <span className="font-[var(--font-cormorant)] italic text-[1.2rem] text-[var(--fog)] opacity-30 tracking-widest">{item}</span>
                   <span className="mx-[2rem] text-[var(--rose)] opacity-50">◆</span>
