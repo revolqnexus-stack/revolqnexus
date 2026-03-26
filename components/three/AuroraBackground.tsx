@@ -3,17 +3,9 @@
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 
-interface AuroraBackgroundProps {
-  intensity?: 'low' | 'high'
-}
-
-export default function AuroraBackground({ intensity = 'low' }: AuroraBackgroundProps) {
+export default function AuroraBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const sceneRef = useRef<THREE.Scene | null>(null)
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null)
-  const materialRef = useRef<THREE.ShaderMaterial | null>(null)
-  const frameId = useRef<number | null>(null)
-
+  
   useEffect(() => {
     if (typeof window === 'undefined') return
 
@@ -21,14 +13,6 @@ export default function AuroraBackground({ intensity = 'low' }: AuroraBackground
     if (!canvas) return
 
     // Scene setup
-    const scene = new THREE.Scene()
-    sceneRef.current = scene
-
-    // Camera setup
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100)
-    camera.position.z = 3
-
-    // Renderer setup
     const renderer = new THREE.WebGLRenderer({ 
       canvas, 
       antialias: true, 
@@ -37,12 +21,15 @@ export default function AuroraBackground({ intensity = 'low' }: AuroraBackground
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.setClearColor(0x000000, 0)
-    rendererRef.current = renderer
+
+    const scene = new THREE.Scene()
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100)
+    camera.position.z = 3
 
     // Geometry
     const geometry = new THREE.PlaneGeometry(10, 6)
 
-    // Vertex Shader
+    // Shaders
     const vertexShader = `
       varying vec2 vUv;
       void main() {
@@ -51,28 +38,16 @@ export default function AuroraBackground({ intensity = 'low' }: AuroraBackground
       }
     `
 
-    // Fragment Shader
     const fragmentShader = `
       uniform float uTime;
       uniform float uScroll;
       uniform vec2 uMouse;
       varying vec2 vUv;
 
-      vec3 mod289(vec3 x) {
-        return x - floor(x * (1.0/289.0)) * 289.0;
-      }
-
-      vec4 mod289(vec4 x) {
-        return x - floor(x * (1.0/289.0)) * 289.0;
-      }
-
-      vec4 permute(vec4 x) {
-        return mod289(((x*34.0)+10.0)*x);
-      }
-
-      vec4 taylorInvSqrt(vec4 r) {
-        return 1.79284291400159 - 0.85373472095314 * r;
-      }
+      vec3 mod289(vec3 x) { return x - floor(x * (1.0/289.0)) * 289.0; }
+      vec4 mod289(vec4 x) { return x - floor(x * (1.0/289.0)) * 289.0; }
+      vec4 permute(vec4 x) { return mod289(((x*34.0)+10.0)*x); }
+      vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
 
       float snoise(vec3 v) {
         const vec2 C = vec2(1.0/6.0, 1.0/3.0);
@@ -110,18 +85,11 @@ export default function AuroraBackground({ intensity = 'low' }: AuroraBackground
         vec3 p1 = vec3(a0.zw,h.y);
         vec3 p2 = vec3(a1.xy,h.z);
         vec3 p3 = vec3(a1.zw,h.w);
-        vec4 norm = taylorInvSqrt(vec4(
-          dot(p0,p0),dot(p1,p1),
-          dot(p2,p2),dot(p3,p3)));
-        p0 *= norm.x; p1 *= norm.y;
-        p2 *= norm.z; p3 *= norm.w;
-        vec4 m = max(0.6 - vec4(
-          dot(x0,x0),dot(x1,x1),
-          dot(x2,x2),dot(x3,x3)), 0.0);
+        vec4 norm = taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
+        p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+        vec4 m = max(0.6 - vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)), 0.0);
         m = m * m;
-        return 42.0 * dot(m*m, vec4(
-          dot(p0,x0),dot(p1,x1),
-          dot(p2,x2),dot(p3,x3)));
+        return 42.0 * dot(m*m, vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
       }
 
       void main() {
@@ -135,7 +103,7 @@ export default function AuroraBackground({ intensity = 'low' }: AuroraBackground
         float n2 = snoise(vec3(uv.x*2.8+0.4, uv.y*1.8-sc*0.2, t*1.5));
         float n3 = snoise(vec3(uv.x*6.0, uv.y*5.0, t*2.5))*0.25;
         float n4 = snoise(vec3(uv.x*0.5+sc*0.1, uv.y*0.4, t*0.6))*0.4;
-
+        
         float noise = n1*0.5 + n2*0.28 + n3 + n4;
         noise = noise * 0.5 + 0.5;
 
@@ -166,7 +134,6 @@ export default function AuroraBackground({ intensity = 'low' }: AuroraBackground
       }
     `
 
-    // Material
     const material = new THREE.ShaderMaterial({
       vertexShader,
       fragmentShader,
@@ -177,99 +144,72 @@ export default function AuroraBackground({ intensity = 'low' }: AuroraBackground
       },
       transparent: true,
     })
-    materialRef.current = material
 
-    // Mesh
     const mesh = new THREE.Mesh(geometry, material)
     scene.add(mesh)
 
-    // Mouse tracking
-    const targetMouse = new THREE.Vector2(0.5, 0.5)
-    const currentMouse = new THREE.Vector2(0.5, 0.5)
+    // Interaction handling
+    let targetMouse = new THREE.Vector2(0.5, 0.5)
+    let currentMouse = new THREE.Vector2(0.5, 0.5)
+    let targetScroll = 0
+    let currentScroll = 0
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const onMouseMove = (e: MouseEvent) => {
       targetMouse.x = e.clientX / window.innerWidth
       targetMouse.y = 1 - e.clientY / window.innerHeight
     }
 
-    // Scroll tracking
-    const targetScroll = 0
-    const currentScroll = 0
-
-    const handleScroll = () => {
+    const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight
-      const scrollValue = window.scrollY / (max || 1)
-      if (materialRef.current) {
-        materialRef.current.uniforms.uScroll.value = scrollValue
-      }
+      targetScroll = window.scrollY / (max || 1)
     }
 
-    // Animation loop
+    window.addEventListener('mousemove', onMouseMove)
+    window.addEventListener('scroll', onScroll, { passive: true })
+
+    // Animation Loop
     const clock = new THREE.Clock()
+    let frameId: number
+
     const animate = () => {
-      frameId.current = requestAnimationFrame(animate)
-
-      // Update time
+      frameId = requestAnimationFrame(animate)
       const elapsedTime = clock.getElapsedTime()
-      if (materialRef.current) {
-        materialRef.current.uniforms.uTime.value = elapsedTime
-      }
-
-      // Lerp mouse
+      
+      material.uniforms.uTime.value = elapsedTime
+      
       currentMouse.lerp(targetMouse, 0.04)
-      if (materialRef.current) {
-        materialRef.current.uniforms.uMouse.value.copy(currentMouse)
-      }
+      material.uniforms.uMouse.value.copy(currentMouse)
+      
+      currentScroll += (targetScroll - currentScroll) * 0.05
+      material.uniforms.uScroll.value = currentScroll
 
       renderer.render(scene, camera)
     }
 
-    // Handle resize
-    const handleResize = () => {
+    const onResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight
       camera.updateProjectionMatrix()
       renderer.setSize(window.innerWidth, window.innerHeight)
     }
 
-    // Event listeners
-    window.addEventListener('mousemove', handleMouseMove)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('resize', handleResize)
-
+    window.addEventListener('resize', onResize)
     animate()
 
-    // Cleanup
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', handleResize)
-      
-      if (frameId.current) {
-        cancelAnimationFrame(frameId.current)
-      }
-      
+      window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onResize)
+      cancelAnimationFrame(frameId)
       renderer.dispose()
       geometry.dispose()
       material.dispose()
-      
-      if (canvas.parentNode) {
-        canvas.parentNode.removeChild(canvas)
-      }
     }
-  }, [intensity])
+  }, [])
 
   return (
-    <canvas
+    <canvas 
       ref={canvasRef}
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100vw',
-        height: '100vh',
-        zIndex: 0,
-        pointerEvents: 'none',
-      }}
+      className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"
     />
   )
 }

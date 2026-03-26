@@ -1,119 +1,71 @@
 'use client'
 
-import { useRef, useEffect, forwardRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { gsap } from 'gsap'
+import Link from 'next/link'
 
 interface MagneticButtonProps {
   children: React.ReactNode
   className?: string
-  onClick?: () => void
   href?: string
-  target?: string
-  rel?: string
+  onClick?: () => void
   style?: React.CSSProperties
-  dataCursor?: string
 }
 
-const MagneticButton = forwardRef<HTMLAnchorElement | HTMLButtonElement, MagneticButtonProps>(({
-  children, 
-  className = '', 
-  onClick, 
-  href,
-  target,
-  rel,
-  style,
-  dataCursor = 'hoverable'
-}, ref) => {
-  const internalRef = useRef<HTMLAnchorElement | HTMLButtonElement | null>(null)
-  const buttonRef = (ref as React.RefObject<HTMLAnchorElement | HTMLButtonElement>) || internalRef
+export default function MagneticButton({ children, className = '', href, onClick, style }: MagneticButtonProps) {
+  const buttonRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
+    const btn = buttonRef.current
+    if (!btn) return
 
-    const button = buttonRef.current
-    if (!button) return
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = btn.getBoundingClientRect()
+      const centerX = rect.left + rect.width / 2
+      const centerY = rect.top + rect.height / 2
+      const distanceX = e.clientX - centerX
+      const distanceY = e.clientY - centerY
 
-    let isHovered = false
-
-    const handleMouseMove = (e: Event) => {
-      if (!isHovered) return
-      const mouseEvent = e as MouseEvent
-      const rect = button.getBoundingClientRect()
-      const x = mouseEvent.clientX - rect.left - rect.width / 2
-      const y = mouseEvent.clientY - rect.top - rect.height / 2
-      
-      gsap.to(button, {
-        x: x * 0.3,
-        y: y * 0.3,
-        duration: 0.4,
+      gsap.to(btn, {
+        x: distanceX * 0.3,
+        y: distanceY * 0.3,
+        duration: 0.3,
         ease: 'power2.out'
       })
     }
 
-    const handleMouseEnter = () => {
-      isHovered = true
-    }
-
     const handleMouseLeave = () => {
-      isHovered = false
-      gsap.to(button, {
+      gsap.to(btn, {
         x: 0,
         y: 0,
-        duration: 0.4,
-        ease: 'elastic.out(1, 0.3)'
+        duration: 0.5,
+        ease: 'elastic.out(1, 0.4)'
       })
     }
 
-    button.addEventListener('mousemove', handleMouseMove)
-    button.addEventListener('mouseenter', handleMouseEnter)
-    button.addEventListener('mouseleave', handleMouseLeave)
+    btn.addEventListener('mousemove', handleMouseMove)
+    btn.addEventListener('mouseleave', handleMouseLeave)
 
     return () => {
-      button.removeEventListener('mousemove', handleMouseMove)
-      button.removeEventListener('mouseenter', handleMouseEnter)
-      button.removeEventListener('mouseleave', handleMouseLeave)
+      btn.removeEventListener('mousemove', handleMouseMove)
+      btn.removeEventListener('mouseleave', handleMouseLeave)
     }
   }, [])
 
-  if (href) {
-    return (
-      <a
-        ref={buttonRef as React.RefObject<HTMLAnchorElement>}
-        href={href}
-        target={target}
-        rel={rel}
-        className={className}
-        onClick={onClick}
-        data-cursor={dataCursor}
-        style={{
-          display: 'inline-block',
-          cursor: 'pointer',
-          ...style
-        }}
-      >
-        {children}
-      </a>
-    )
-  }
-
-  return (
-    <button
-      ref={buttonRef as React.RefObject<HTMLButtonElement>}
-      type="button"
-      className={className}
+  const content = (
+    <div 
+      ref={buttonRef} 
+      className={`inline-block transition-transform duration-200 ${className}`}
+      style={style}
       onClick={onClick}
-      data-cursor={dataCursor}
-      style={{
-        display: 'inline-block',
-        cursor: 'pointer',
-        ...style
-      }}
     >
       {children}
-    </button>
+    </div>
   )
-})
 
-MagneticButton.displayName = 'MagneticButton'
+  if (href) {
+    return <Link href={href}>{content}</Link>
+  }
 
-export default MagneticButton
+  return content
+}

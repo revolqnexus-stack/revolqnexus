@@ -5,51 +5,38 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useEffect, createContext, useContext, ReactNode } from 'react'
 
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger)
-}
+gsap.registerPlugin(ScrollTrigger)
 
-interface LenisContextType {
-  lenis: Lenis | null
-}
-
-const LenisContext = createContext<LenisContextType>({ lenis: null })
+const LenisContext = createContext<Lenis | null>(null)
 
 export const useLenis = () => useContext(LenisContext)
 
-interface LenisProviderProps {
-  children: ReactNode
-}
-
-export default function LenisProvider({ children }: LenisProviderProps) {
+export default function LenisProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
-    if (typeof window === 'undefined') return
-
     const lenis = new Lenis({
       duration: 1.4,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     })
 
-    // CRITICAL: sync lenis with GSAP ticker
-    gsap.ticker.add((time) => {
+    // Sync lenis with GSAP ticker
+    const update = (time: number) => {
       lenis.raf(time * 1000)
-    })
-
+    }
+    gsap.ticker.add(update)
     gsap.ticker.lagSmoothing(0)
 
-    // CRITICAL: refresh ScrollTrigger after init
+    // Refresh ScrollTrigger after init
     ScrollTrigger.refresh()
 
-    // Clean up on unmount
     return () => {
       lenis.destroy()
-      gsap.ticker.remove(lenis.raf)
+      gsap.ticker.remove(update)
     }
   }, [])
 
   return (
-    <LenisContext.Provider value={{ lenis: null }}>
+    <LenisContext.Provider value={null}>
       {children}
     </LenisContext.Provider>
   )

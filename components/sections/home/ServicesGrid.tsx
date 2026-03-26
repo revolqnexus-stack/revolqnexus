@@ -4,224 +4,124 @@ import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { 
-  Code2, 
-  Search, 
-  Bot, 
-  PenLine, 
-  Layers, 
-  RefreshCw,
-  ArrowRight 
-} from 'lucide-react'
+import { Code2, Search, Bot, PenLine, Layers, RefreshCw } from 'lucide-react'
+import SplitText from '@/components/ui/SplitText'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const services = [
+  { 
+    id: '01', 
+    title: 'WEB DEVELOPMENT', 
+    href: '/services/web-development', 
+    icon: Code2, 
+    desc: 'Custom Next.js systems engineered for performance and conversion.' 
+  },
+  { 
+    id: '02', 
+    title: 'SEO & GBP', 
+    href: '/services/seo-gbp', 
+    icon: Search, 
+    desc: 'Visibility systems that put your business in front of the right customers.' 
+  },
+  { 
+    id: '03', 
+    title: 'AI AUTOMATION', 
+    href: '/services/ai-automation', 
+    icon: Bot, 
+    desc: 'WhatsApp agents and n8n workflows that work while you sleep.' 
+  },
+  { 
+    id: '04', 
+    title: 'CONTENT & COPY', 
+    href: '/services/content-copy', 
+    icon: PenLine, 
+    desc: 'Magnetic words that turn visitors into loyal clients.' 
+  },
+  { 
+    id: '05', 
+    title: 'BRAND STRATEGY', 
+    href: '/services/brand-strategy', 
+    icon: Layers, 
+    desc: 'Visual language and positioning for unforgettable businesses.' 
+  },
+  { 
+    id: '06', 
+    title: 'MONTHLY RETAINER', 
+    href: '/services/retainer', 
+    icon: RefreshCw, 
+    desc: 'Ongoing digital leadership and GBP management for consistent growth.' 
+  },
+]
 
 export default function ServicesGrid() {
-  const sectionRef = useRef<HTMLElement>(null)
-
-  const services = [
-    {
-      number: '01',
-      icon: Code2,
-      title: 'WEB DEVELOPMENT',
-      description: 'Custom Next.js systems engineered for growth',
-      href: '/services/web-development'
-    },
-    {
-      number: '02',
-      icon: Search,
-      title: 'SEO & GBP',
-      description: 'Local search visibility that compounds over time',
-      href: '/services/seo-gbp'
-    },
-    {
-      number: '03',
-      icon: Bot,
-      title: 'AI AUTOMATION',
-      description: 'WhatsApp agents and workflows that work 24/7',
-      href: '/services/ai-automation'
-    },
-    {
-      number: '04',
-      icon: PenLine,
-      title: 'CONTENT & COPY',
-      description: 'Words that make visitors become customers',
-      href: '/services/content-copy'
-    },
-    {
-      number: '05',
-      icon: Layers,
-      title: 'BRAND STRATEGY',
-      description: 'Positioning and identity that makes you unforgettable',
-      href: '/services/brand-strategy'
-    },
-    {
-      number: '06',
-      icon: RefreshCw,
-      title: 'MONTHLY RETAINER',
-      description: 'We become your complete digital team',
-      href: '/services/retainer'
-    },
-  ]
+  const gridRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
+    const el = gridRef.current
+    if (!el) return
 
-    const section = sectionRef.current
-    if (!section) return
-
-    // Check for reduced motion
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReduced) return
-
-    gsap.registerPlugin(ScrollTrigger)
-
-    const ctx = gsap.context(() => {
-      // Animate cards staggered
-      gsap.from('.service-card', {
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        stagger: 0.07,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 70%',
-        }
-      })
-
-      // Animate title
-      gsap.from('.services-title', {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.services-title',
-          start: 'top 80%',
-        }
-      })
-    }, section)
-
-    return () => {
-      ctx.revert()
-    }
+    const cards = el.querySelectorAll('.service-card')
+    
+    gsap.from(cards, {
+      y: 40,
+      opacity: 0,
+      stagger: 0.07,
+      duration: 1.2,
+      ease: 'power4.out',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 80%',
+      }
+    })
   }, [])
 
   return (
-    <section 
-      ref={sectionRef}
-      className="relative z-[10]"
-      style={{
-        padding: '10rem 5rem',
-        position: 'relative',
-        zIndex: 10,
-      }}
-    >
-      {/* Section Header */}
-      <div className="text-center mb-16">
-        <div 
-          className="mb-6"
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.62rem',
-            fontWeight: 300,
-            letterSpacing: '0.5em',
-            color: 'var(--rose)',
-            textTransform: 'uppercase',
-          }}
-        >
-          WHAT WE DO
+    <section className="relative z-10 py-[10rem] px-[2rem] sm:px-[5rem]">
+      <div className="max-w-7xl mx-auto">
+        {/* Label and Title */}
+        <div className="mb-16">
+          <div className="label mb-4">WHAT WE DO</div>
+          <h2 className="h2 max-w-2xl">
+            <SplitText text="Every system." />
+            <em>Carefully built.</em>
+          </h2>
         </div>
-        
-        <h2 className="services-title h1 mb-4">
-          Every system.<br />
-          <em>Carefully built.</em>
-        </h2>
-      </div>
 
-      {/* Services Grid */}
-      <div 
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0"
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '1px',
-          background: 'var(--border)',
-        }}
-      >
-        {services.map((service, index) => (
-          <Link
-            key={index}
-            href={service.href}
-            className="service-card group block transition-all duration-300 hover:bg-[var(--ink4)] border-l-2 border-transparent hover:border-l-[var(--rose)]"
-            style={{
-              background: 'var(--ink3)',
-              padding: '3rem 2.5rem',
-              textDecoration: 'none',
-              color: 'inherit',
-              cursor: 'pointer',
-            }}
-          >
-            {/* Number */}
-            <div 
-              className="mb-8"
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.6rem',
-                fontWeight: 300,
-                color: 'var(--rose)',
-              }}
+        {/* 2x3 Grid */}
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 bg-[var(--border)] gap-[1px]">
+          {services.map((service, i) => (
+            <Link 
+              key={i} 
+              href={service.href}
+              className="service-card group relative bg-[var(--ink3)] p-[3rem] transition-colors duration-400 hover:bg-[var(--ink4)] flex flex-col min-h-[400px]"
             >
-              {service.number}
-            </div>
+              {/* Left Accent Border */}
+              <div className="absolute left-0 top-0 bottom-0 w-0 bg-[var(--rose)] transition-all duration-400 group-hover:w-[2px]" />
 
-            {/* Icon */}
-            <div className="mb-6">
-              <service.icon 
-                size={20} 
-                style={{ color: 'var(--fog)' }}
-              />
-            </div>
+              {/* Number and Icon */}
+              <div className="flex justify-between items-start mb-12">
+                <span className="font-[var(--font-mono)] text-[0.6rem] text-[var(--rose)] tracking-widest">{service.id}</span>
+                <service.icon size={20} className="text-[var(--fog)] group-hover:text-[var(--white)] transition-colors duration-400" />
+              </div>
 
-            {/* Title */}
-            <h3 
-              className="mb-4"
-              style={{
-                fontFamily: 'var(--font-cormorant)',
-                fontSize: '1.8rem',
-                fontWeight: 300,
-                color: 'var(--white)',
-              }}
-            >
-              {service.title}
-            </h3>
+              {/* Title and Body */}
+              <div className="mt-auto">
+                <h3 className="h3 mb-4 group-hover:text-[var(--white)] transition-colors duration-400 leading-tight">
+                  {service.title}
+                </h3>
+                <p className="body text-[0.85rem] line-clamp-3">
+                  {service.desc}
+                </p>
+              </div>
 
-            {/* Description */}
-            <p 
-              className="mb-6"
-              style={{
-                fontFamily: 'var(--font-jost)',
-                fontSize: '0.85rem',
-                fontWeight: 200,
-                lineHeight: 1.6,
-                color: 'var(--fog)',
-              }}
-            >
-              {service.description}
-            </p>
-
-            {/* Arrow */}
-            <div 
-              className="card-arrow flex justify-end transition-transform duration-300 group-hover:translate-x-1"
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.8rem',
-                color: 'var(--rose)',
-              }}
-            >
-              <ArrowRight size={16} />
-            </div>
-          </Link>
-        ))}
+              {/* Arrow */}
+              <div className="mt-8 self-end font-[var(--font-mono)] text-[var(--rose)] text-[1.2rem] transition-transform duration-400 group-hover:translate-x-2">
+                →
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   )

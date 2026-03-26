@@ -1,15 +1,5 @@
-interface DividerProps {
-  className?: string
-}
-
-export default function Divider({ className = '' }: DividerProps) {
+export default function Divider({ className = '' }: { className?: string }) {
   return (
-    <div 
-      className={`w-full ${className}`}
-      style={{
-        height: '1px',
-        background: 'var(--border)',
-      }}
-    />
+    <div className={`w-full h-[1px] bg-[var(--border)] ${className}`} />
   )
 }

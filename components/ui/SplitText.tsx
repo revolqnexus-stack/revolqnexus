@@ -4,6 +4,8 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+gsap.registerPlugin(ScrollTrigger)
+
 interface SplitTextProps {
   text: string
   className?: string
@@ -15,58 +17,34 @@ export default function SplitText({ text, className = '', delay = 0, once = true
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
+    const el = containerRef.current
+    if (!el) return
 
-    const container = containerRef.current
-    if (!container) return
-
-    // Check for reduced motion
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReduced) return
-
-    gsap.registerPlugin(ScrollTrigger)
-
-    const ctx = gsap.context(() => {
-      const chars = container.querySelectorAll('.char')
-      
-      gsap.from(chars, {
-        y: '110%',
-        duration: 0.9,
-        stagger: 0.022,
-        ease: 'power4.out',
-        delay,
-        scrollTrigger: {
-          trigger: container,
-          start: 'top 82%',
-          once,
-        },
-      })
-    }, container)
-
-    return () => {
-      ctx.revert()
-    }
+    const chars = el.querySelectorAll('.char')
+    
+    gsap.from(chars, {
+      y: '110%',
+      duration: 0.9,
+      stagger: 0.022,
+      ease: 'power4.out',
+      delay,
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 82%',
+        once,
+      }
+    })
   }, [delay, once])
 
-  // Split text into characters
-  const splitText = text.split('').map((char, index) => {
-    if (char === ' ') {
-      return (
-        <span key={index} style={{ overflow: 'hidden', display: 'inline-block' }}>
-          <span className="char">&nbsp;</span>
-        </span>
-      )
-    }
-    return (
-      <span key={index} style={{ overflow: 'hidden', display: 'inline-block' }}>
-        <span className="char">{char}</span>
-      </span>
-    )
-  })
-
   return (
-    <div ref={containerRef} className={className}>
-      {splitText}
+    <div ref={containerRef} className={`${className} flex flex-wrap`}>
+      {text.split('').map((char, i) => (
+        <span key={i} className="overflow-hidden inline-block leading-[1.1]">
+          <span className="char inline-block whitespace-pre">
+            {char === ' ' ? '\u00A0' : char}
+          </span>
+        </span>
+      ))}
     </div>
   )
 }

@@ -1,52 +1,20 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { motion, useScroll, useSpring } from 'framer-motion'
 
 export default function ProgressBar() {
-  const [scrollProgress, setScrollProgress] = useState(0)
-  const animationFrame = useRef<number | null>(null)
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-
-    const updateProgress = () => {
-      const scrollTop = window.scrollY
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight
-      const progress = (scrollTop / docHeight) * 100
-      setScrollProgress(progress)
-      animationFrame.current = requestAnimationFrame(updateProgress)
-    }
-
-    const handleScroll = () => {
-      if (animationFrame.current) {
-        cancelAnimationFrame(animationFrame.current)
-      }
-      updateProgress()
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    updateProgress()
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      if (animationFrame.current) {
-        cancelAnimationFrame(animationFrame.current)
-      }
-    }
-  }, [])
+  const { scrollYProgress } = useScroll()
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  })
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        height: '1px',
-        zIndex: 500,
-        background: 'linear-gradient(90deg, var(--rose), var(--gold))',
-        width: `${scrollProgress}%`,
-        transition: 'width 0.1s ease-out',
-      }}
+    <motion.div
+      className="fixed top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-[var(--rose)] to-[var(--gold)] z-[500] origin-left"
+      style={{ scaleX }}
     />
   )
 }

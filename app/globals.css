@@ -3,188 +3,143 @@
 @tailwind utilities;
 
 :root {
-  /* PREMIUM ULTRAMARINE PALETTE */
-  --bg-black: #000000;       /* Absolute dark */
-  --bg-sand: #F2EFE9;        /* Warm light mode background */
+  /* Backgrounds */
+  --ink:     #05050a;   /* primary bg — near black */
+  --ink2:    #0c0c14;   /* secondary bg — slightly lighter */
+  --ink3:    #111119;   /* card bg */
+  --ink4:    #1a1a24;   /* elevated card bg */
   
-  --fluid-ultramarine: #1E3A8A;     /* Deep premium blue */
-  --fluid-cobalt: #0047AB;        /* Rich cobalt blue */
-  --fluid-midnight: #0F172A;      /* Dark depth for gradients */
-
-  --text-light: #FFFFFF;
-  --text-dark: #111111;
-  --text-muted-dark: #888888;
-  --text-muted-light: #A0A0A0;
-
-  --border-light: rgba(255, 255, 255, 0.1);
-  --border-dark: rgba(17, 17, 17, 0.1);
-
-  /* Font Variables */
-  --font-serif: 'Playfair Display', 'Cormorant Garamond', serif;
-  --font-sans: 'Inter', 'Manrope', 'Jost', sans-serif;
+  /* Text */
+  --white:   #f0ecf5;   /* primary text — warm white */
+  --fog:     #a8a4b8;   /* secondary text — muted purple-gray */
+  --dim:     #5a5870;   /* tertiary text — very muted */
+  
+  /* Accent */
+  --rose:    #c49a9a;   /* primary accent */
+  --rose2:   #e8b4b4;   /* lighter rose — hover states */
+  --gold:    #d4b070;   /* secondary accent — italic headings */
+  --violet:  #6b5fa8;   /* tertiary accent */
+  
+  /* Borders */
+  --border:  rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  
+  /* Glass */
+  --glass:   rgba(255,255,255,0.03);
+  --glass2:  rgba(255,255,255,0.05);
 }
 
-body {
-  background-color: var(--bg-black);
-  color: var(--text-light);
-  font-family: var(--font-sans), sans-serif;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-  transition: background-color 0.8s ease, color 0.8s ease;
-}
-
-/* DUAL THEME TOGGLE CLASS (Triggered by GSAP ScrollTrigger) */
-body.theme-light {
-  background-color: var(--bg-sand);
-  color: var(--text-dark);
-}
-
-/* ═══════════════════════════════════════════════════════════
-   TYPOGRAPHY — MASSIVE SCALE
-   ═══════════════════════════════════════════════════════════ */
-
-.display-text {
-  font-family: var(--font-serif), serif;
-  font-size: clamp(2.5rem, 8vw, 6rem);  /* Corrected for mobile */
-  font-weight: 400;
-  line-height: 0.85;
-  letter-spacing: -0.02em;  /* Reduced for better readability */
-  text-transform: none;
-}
-
-.display-text.italic {
-  font-style: italic;
-  font-weight: 300;
-}
-
-.display-text.hero {
-  font-size: clamp(3rem, 10vw, 8rem);  /* Hero-specific larger size */
-}
-
-.body-text {
-  font-family: var(--font-sans), sans-serif;
-  font-size: clamp(0.875rem, 1.2vw, 1rem);  /* More reasonable body text */
-  line-height: 1.6;
-  font-weight: 400;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   PHASE 1 LIQUID FLUID SIMULATION (CSS ONLY)
-   This mimics the WebGL Leeroy background using CSS filters
-   ═══════════════════════════════════════════════════════════ */
-
-.liquid-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  background: var(--bg-black);
-  overflow: hidden;
-  /* The magic Gooey formula: blur + extreme contrast */
-  filter: blur(40px) contrast(80);
-  -webkit-filter: blur(40px) contrast(80);
-}
-
-/* Hide liquid when in light mode */
-body.theme-light .liquid-bg {
-  opacity: 0;
-  transition: opacity 0.8s ease;
-}
-
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  mix-blend-mode: screen;
-}
-
-.blob-1 {
-  width: 60vw;
-  height: 60vw;
-  background: var(--fluid-ultramarine);
-  top: -10%;
-  left: -10%;
-  animation: float 14s infinite ease-in-out alternate;
-}
-
-.blob-2 {
-  width: 50vw;
-  height: 50vw;
-  background: var(--fluid-cobalt);
-  bottom: -20%;
-  right: -10%;
-  animation: float-reverse 18s infinite ease-in-out alternate;
-}
-
-.blob-3 {
-  width: 40vw;
-  height: 40vw;
-  background: var(--fluid-midnight);
-  top: 30%;
-  left: 30%;
-  animation: float 22s infinite ease-in-out alternate;
-}
-
-@keyframes float {
-  0% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(10vw, -15vh) scale(1.2); }
-  66% { transform: translate(-10vw, 10vh) scale(0.9); }
-  100% { transform: translate(0, 0) scale(1); }
-}
-
-@keyframes float-reverse {
-  0% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(-15vw, 10vh) scale(1.1); }
-  66% { transform: translate(10vw, -15vh) scale(1.3); }
-  100% { transform: translate(0, 0) scale(1); }
-}
-
-/* Circular "Défiler" (Scroll) Button */
-.circular-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 1px solid var(--border-dark);
-  background: transparent;
-  color: var(--text-dark);
-  font-family: var(--font-sans);
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s;
-  cursor: pointer;
-}
-
-.circular-btn:hover {
-  background: var(--text-dark);
-  color: var(--bg-sand);
-  transform: scale(1.05);
-}
-
-/* Base styles */
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
-html {
-  scroll-behavior: smooth;
+body {
+  background-color: var(--ink);
+  color: var(--white);
+  font-family: var(--font-jost), sans-serif;
+  font-weight: 200;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-/* Utility classes */
-.overflow-hidden {
-  overflow: hidden;
+/* ═══════════════════════════════════════════════════════════
+   TYPOGRAPHY SYSTEM
+   ═══════════════════════════════════════════════════════════ */
+
+/* Display — hero headlines */
+.display {
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(5.5rem, 13vw, 12rem);
+  font-weight: 300;
+  line-height: 0.88;
+  letter-spacing: -0.02em;
 }
 
-.text-outline-ultramarine {
-  text-shadow: 
-    -1px -1px 0 var(--fluid-ultramarine),
-    1px -1px 0 var(--fluid-ultramarine),
-    -1px 1px 0 var(--fluid-ultramarine),
-    1px 1px 0 var(--fluid-ultramarine);
+.display em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+/* H1 */
+.h1 {
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 300;
+  line-height: 0.92;
+}
+
+/* H2 — section titles */
+.h2 {
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(2.2rem, 4vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.0;
+}
+
+.h2 em {
+  font-style: italic;
+  color: var(--gold);
+  display: block;
+}
+
+/* H3 — card titles */
+.h3 {
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  font-weight: 300;
+}
+
+/* Section label */
+.label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.62rem;
+  font-weight: 300;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+
+/* Body */
+.body {
+  font-family: var(--font-jost), sans-serif;
+  font-size: 0.92rem;
+  font-weight: 200;
+  line-height: 1.9;
+  color: var(--fog);
+}
+
+/* Mono UI */
+.mono {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   UTILITIES
+   ═══════════════════════════════════════════════════════════ */
+
+.bg-ink { background-color: var(--ink); }
+.bg-ink2 { background-color: var(--ink2); }
+.bg-ink3 { background-color: var(--ink3); }
+.bg-ink4 { background-color: var(--ink4); }
+
+.text-white { color: var(--white); }
+.text-fog { color: var(--fog); }
+.text-dim { color: var(--dim); }
+.text-rose { color: var(--rose); }
+.text-gold { color: var(--gold); }
+
+.border-subtle { border: 1px solid var(--border); }
+.border-rose { border: 1px solid var(--rose); }
+
+/* Liquid Background Container */
+#liquid-canvas-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
 }

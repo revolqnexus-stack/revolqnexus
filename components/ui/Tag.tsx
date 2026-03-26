@@ -1,19 +1,11 @@
-interface TagProps {
-  children: React.ReactNode
-  className?: string
-}
-
-export default function Tag({ children, className = '' }: TagProps) {
+export default function Tag({ children, className = '' }: { children: React.ReactNode, className?: string }) {
   return (
-    <span 
-      className={`inline-block px-3 py-1 text-xs font-mono tracking-wider uppercase border rounded-full ${className}`}
-      style={{
-        borderColor: 'var(--border)',
-        color: 'var(--fog)',
-        backgroundColor: 'var(--glass)',
-      }}
+    <div 
+      className={`inline-block px-[0.8rem] py-[0.3rem] border border-[var(--border2)] rounded-full ${className}`}
     >
-      {children}
-    </span>
+      <span className="font-[var(--font-mono)] text-[0.55rem] text-[var(--rose)] tracking-[0.2em] uppercase">
+        {children}
+      </span>
+    </div>
   )
 }

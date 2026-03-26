@@ -1,39 +1,34 @@
+import Script from 'next/script'
+
 export default function JsonLd() {
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'REVOLQ',
-    description: 'Digital agency building Next.js websites, SEO systems, and AI automations',
-    url: 'https://revolq.in',
-    logo: 'https://revolq.in/logo.png',
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+91 79956 17374',
-      contactType: 'customer service',
-      availableLanguage: 'English',
-    },
-    address: {
+    '@type': 'ProfessionalService',
+    'name': 'REVOLQ',
+    'image': 'https://revolq.in/og-image.jpg',
+    'description': 'Advanced digital agency in Kerala building Next.js websites, SEO systems, and AI automations.',
+    'address': {
       '@type': 'PostalAddress',
-      addressCountry: 'IN',
-      addressRegion: 'Kerala',
+      'addressLocality': 'Kerala',
+      'addressCountry': 'IN'
     },
-    founders: [
+    'url': 'https://revolq.in',
+    'telephone': '+917995617374',
+    'founder': [
       {
         '@type': 'Person',
-        name: 'Ajmal Mullapati',
+        'name': 'Ajmal Mullapati'
       },
       {
         '@type': 'Person',
-        name: 'Eathen Baby',
-      },
-    ],
-    sameAs: [
-      'https://wa.me/917995617374',
-    ],
+        'name': 'Eathen Baby'
+      }
+    ]
   }
 
   return (
-    <script
+    <Script
+      id="json-ld"
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />

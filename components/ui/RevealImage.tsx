@@ -5,109 +5,52 @@ import Image from 'next/image'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+gsap.registerPlugin(ScrollTrigger)
+
 interface RevealImageProps {
   src: string
   alt: string
-  width?: number
-  height?: number
+  aspect?: string
   className?: string
-  priority?: boolean
 }
 
-export default function RevealImage({ 
-  src, 
-  alt, 
-  width = 800, 
-  height = 600, 
-  className = '',
-  priority = false
-}: RevealImageProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const imageRef = useRef<HTMLDivElement>(null)
+export default function RevealImage({ src, alt, aspect = 'aspect-video', className = '' }: RevealImageProps) {
+  const outerRef = useRef<HTMLDivElement>(null)
+  const innerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
+    const outer = outerRef.current
+    const inner = innerRef.current
+    if (!outer || !inner) return
 
-    const container = containerRef.current
-    const image = imageRef.current
-    
-    if (!container || !image) return
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: outer,
+        start: 'top 80%',
+      }
+    })
 
-    // Check for reduced motion
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReduced) return
+    tl.fromTo(outer, 
+      { clipPath: 'inset(100% 0 0 0)' },
+      { clipPath: 'inset(0% 0 0 0)', duration: 1.2, ease: 'power4.inOut' }
+    )
 
-    gsap.registerPlugin(ScrollTrigger)
-
-    const ctx = gsap.context(() => {
-      // Animate clip path
-      gsap.fromTo(
-        container,
-        { 
-          clipPath: 'inset(100% 0 0 0)' 
-        },
-        { 
-          clipPath: 'inset(0% 0 0 0)', 
-          duration: 1.2,
-          ease: 'power4.inOut',
-          scrollTrigger: {
-            trigger: container,
-            start: 'top 80%',
-            once: true,
-          },
-        }
-      )
-
-      // Animate image scale
-      gsap.fromTo(
-        image,
-        { 
-          scale: 1.12 
-        },
-        { 
-          scale: 1, 
-          duration: 1.2, 
-          ease: 'power4.inOut',
-          scrollTrigger: {
-            trigger: container,
-            start: 'top 80%',
-            once: true,
-          },
-        }
-      )
-    }, container)
-
-    return () => {
-      ctx.revert()
-    }
+    tl.fromTo(inner,
+      { scale: 1.12 },
+      { scale: 1, duration: 1.2, ease: 'power4.inOut' },
+      0
+    )
   }, [])
 
   return (
-    <div 
-      ref={containerRef}
-      className={className}
-      style={{
-        position: 'relative',
-        overflow: 'hidden',
-      }}
-    >
-      <div 
-        ref={imageRef}
-        style={{
-          transform: 'scale(1.12)',
-        }}
-      >
-        <Image
-          src={src}
-          alt={alt}
-          width={width}
-          height={height}
-          priority={priority}
-          style={{
-            width: '100%',
-            height: 'auto',
-            display: 'block',
-          }}
+    <div ref={outerRef} className={`relative overflow-hidden ${aspect} ${className}`}>
+      <div ref={innerRef} className="w-full h-full">
+        <Image 
+          src={src} 
+          alt={alt} 
+          fill 
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 80vw"
         />
       </div>
     </div>

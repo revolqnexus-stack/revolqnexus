@@ -3,100 +3,81 @@
 import { useEffect, useRef } from 'react'
 
 export default function Cursor() {
-  const cursorDot = useRef<HTMLDivElement>(null)
-  const cursorRing = useRef<HTMLDivElement>(null)
-  const mousePosition = useRef({ x: 0, y: 0 })
-  const ringPosition = useRef({ x: 0, y: 0 })
-  const animationFrame = useRef<number | null>(null)
+  const dotRef = useRef<HTMLDivElement>(null)
+  const ringRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    const dot = cursorDot.current
-    const ring = cursorRing.current
-    
+    const dot = dotRef.current
+    const ring = ringRef.current
     if (!dot || !ring) return
 
+    const mouse = { x: 0, y: 0 }
+    const dotPos = { x: 0, y: 0 }
+    const ringPos = { x: 0, y: 0 }
+
     const handleMouseMove = (e: MouseEvent) => {
-      mousePosition.current.x = e.clientX
-      mousePosition.current.y = e.clientY
-
-      // Update dot position immediately
-      dot.style.transform = `translate(${e.clientX - 3}px, ${e.clientY - 3}px)`
+      mouse.x = e.clientX
+      mouse.y = e.clientY
     }
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
-      if (target.matches('button, a, input, textarea, [data-cursor="hoverable"]')) {
-        ring.style.width = '64px'
-        ring.style.height = '64px'
-      }
+    const animate = () => {
+      // Lerp dot
+      dotPos.x += (mouse.x - dotPos.x) * 0.2
+      dotPos.y += (mouse.y - dotPos.y) * 0.2
+      dot.style.transform = `translate3d(${dotPos.x}px, ${dotPos.y}px, 0) translate(-50%, -50%)`
+
+      // Lerp ring
+      ringPos.x += (mouse.x - ringPos.x) * 0.1
+      ringPos.y += (mouse.y - ringPos.y) * 0.1
+      ring.style.transform = `translate3d(${ringPos.x}px, ${ringPos.y}px, 0) translate(-50%, -50%)`
+
+      requestAnimationFrame(animate)
     }
 
-    const handleMouseOut = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
-      if (target.matches('button, a, input, textarea, [data-cursor="hoverable"]')) {
-        ring.style.width = '40px'
-        ring.style.height = '40px'
-      }
+    const handleHover = () => {
+      ring.style.width = '64px'
+      ring.style.height = '64px'
     }
 
-    // Animate ring with lerp
-    const animateRing = () => {
-      ringPosition.current.x += (mousePosition.current.x - ringPosition.current.x) * 0.15
-      ringPosition.current.y += (mousePosition.current.y - ringPosition.current.y) * 0.15
-
-      ring.style.transform = `translate(${ringPosition.current.x - 20}px, ${ringPosition.current.y - 20}px)`
-
-      animationFrame.current = requestAnimationFrame(animateRing)
+    const handleHoverOut = () => {
+      ring.style.width = '40px'
+      ring.style.height = '40px'
     }
 
-    document.addEventListener('mousemove', handleMouseMove)
-    document.addEventListener('mouseover', handleMouseOver)
-    document.addEventListener('mouseout', handleMouseOut)
-    animateRing()
+    window.addEventListener('mousemove', handleMouseMove)
+    
+    // Add hover listeners to all links and buttons
+    const hoverables = document.querySelectorAll('a, button, [role="button"]')
+    hoverables.forEach(el => {
+      el.addEventListener('mouseenter', handleHover)
+      el.addEventListener('mouseleave', handleHoverOut)
+    })
+
+    const frameId = requestAnimationFrame(animate)
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove)
-      document.removeEventListener('mouseover', handleMouseOver)
-      document.removeEventListener('mouseout', handleMouseOut)
-      if (animationFrame.current) {
-        cancelAnimationFrame(animationFrame.current)
-      }
+      window.removeEventListener('mousemove', handleMouseMove)
+      cancelAnimationFrame(frameId)
+      hoverables.forEach(el => {
+        el.removeEventListener('mouseenter', handleHover)
+        el.removeEventListener('mouseleave', handleHoverOut)
+      })
     }
   }, [])
 
   return (
     <>
-      <div
-        ref={cursorDot}
+      <div 
+        ref={dotRef}
         id="cursor-dot"
-        style={{
-          position: 'fixed',
-          width: '6px',
-          height: '6px',
-          background: 'var(--rose2)',
-          borderRadius: '50%',
-          pointerEvents: 'none',
-          zIndex: 9999,
-          mixBlendMode: 'difference',
-          transform: 'translate(-50%, -50%)',
-        }}
+        className="fixed top-0 left-0 w-[6px] h-[6px] bg-[var(--rose2)] rounded-full pointer-events-none z-[9999] mix-blend-difference hidden sm:block"
       />
-      <div
-        ref={cursorRing}
+      <div 
+        ref={ringRef}
         id="cursor-ring"
-        style={{
-          position: 'fixed',
-          width: '40px',
-          height: '40px',
-          border: '1px solid rgba(196,154,154,0.3)',
-          borderRadius: '50%',
-          pointerEvents: 'none',
-          zIndex: 9998,
-          transform: 'translate(-50%, -50%)',
-          transition: 'width 0.3s, height 0.3s, opacity 0.3s',
-        }}
+        className="fixed top-0 left-0 w-[40px] h-[40px] border border-[rgba(196,154,154,0.3)] rounded-full pointer-events-none z-[9998] transition-[width,height,opacity] duration-300 hidden sm:block"
       />
     </>
   )
