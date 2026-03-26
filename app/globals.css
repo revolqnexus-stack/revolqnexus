@@ -1,34 +1,25 @@
 @import "tailwindcss";
 
 :root {
-  /* Backgrounds */
-  --ink:     #050505;   /* deep ink black */
-  --ink2:    #0a0a0f;   /* secondary bg */
-  --ink3:    #12121e;   /* card bg */
-  --ink4:    #1a1a2e;   /* elevated card bg */
+  /* LEEROY INSPIRED PALETTE */
+  --bg-black: #000000;       /* Pure Black */
+  --bg-sand: #F2EFE9;        /* Warm light mode background */
   
-  /* Text */
-  --white:   #fdfdfd;   /* pristine off-white */
-  --fog:     #94a3b8;   /* secondary text */
-  --dim:     #475569;   /* tertiary text */
-  
-  /* Accent — Editorial Theme */
-  --accent:  #cfb53b;   /* Editorial Gold */
-  --accent2: #f43f5e;   /* Rose / Highlight */
-  --accent3: #7c3aed;   /* Electric Purple (subtle) */
-  --gold:    #cfb53b;
-  --rose:    #f43f5e;
-  --glow:    rgba(207, 181, 59, 0.2);
-  
-  --nav-height: 80px;
-  
-  /* Borders */
-  --border:  rgba(255, 255, 255, 0.05);
-  --border2: rgba(207, 181, 59, 0.1); 
-  
-  /* Glass */
-  --glass:   rgba(5, 5, 5, 0.7);
-  --glass2:  rgba(10, 10, 15, 0.8);
+  --accent-gold: #f1b000;     /* Vibrant Gold (Leeroy signature) */
+  --text-white: #ffffff;       /* Pure White */
+  --text-gray: #a1a1aa;        /* Soft Gray */
+
+  --text-light: var(--text-white);
+  --text-dark: #111111;
+  --text-muted-dark: #888888;
+  --text-muted-light: #A0A0A0;
+
+  --border-light: rgba(255, 255, 255, 0.1);
+  --border-dark: rgba(17, 17, 17, 0.1);
+
+  /* Font Variables */
+  --font-serif: 'Cormorant Garamond', 'Playfair Display', serif;
+  --font-sans: 'Inter', 'Manrope', 'Jost', sans-serif;
 }
 
 * {
@@ -37,9 +28,9 @@
 }
 
 body {
-  background-color: var(--ink);
-  color: var(--white);
-  font-family: var(--font-jost), sans-serif;
+  background-color: var(--bg-black);
+  color: var(--text-white);
+  font-family: var(--font-sans), sans-serif;
   font-weight: 200;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;

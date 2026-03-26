@@ -17,7 +17,7 @@ export default function Hero() {
           <SplitText text="Websites that" className="justify-center" />
           <div>
             <SplitText text="rank, " className="justify-center inline" />
-            <em className="serif-italic">
+            <em className="serif-italic text-[var(--accent-gold)]">
               <SplitText text="convert" className="justify-center inline" />
             </em>
             <SplitText text="," className="justify-center inline" />

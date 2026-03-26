@@ -20,7 +20,7 @@ export default function WorkPreview() {
         <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-[4rem] items-start mb-[12rem] group">
           {/* Vertical Number */}
           <div className="hidden lg:block lg:col-span-1">
-            <div className="font-[var(--font-cormorant)] text-[5rem] text-[var(--white)] opacity-10 leading-none sticky top-32">01</div>
+            <div className="font-[var(--font-cormorant)] text-[5rem] text-[var(--text-white)] opacity-10 leading-none sticky top-32">01</div>
           </div>
 
           {/* Image Side */}
@@ -31,6 +31,14 @@ export default function WorkPreview() {
               aspect="aspect-[4/5]"
               className="grayscale group-hover:grayscale-0 transition-all duration-1000"
             />
+            <div className="mt-6">
+              <h3 className="text-[2rem] font-[var(--font-cormorant)] text-[var(--text-white)] mb-2">
+                NIXTUDIO
+              </h3>
+              <p className="text-sm text-[var(--text-gray)]">
+                by Nikita Liby
+              </p>
+            </div>
           </div>
 
           {/* Text Side */}

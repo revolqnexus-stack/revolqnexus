@@ -83,49 +83,44 @@ export default function ServicesGrid() {
   }, [])
 
   return (
-    <section className="relative z-10 py-[12rem] px-[2rem] sm:px-[5rem] border-b border-[var(--border)]">
+    <section className="relative z-10 py-[12rem] px-[2rem] sm:px-[5rem]">
       <div className="max-w-7xl mx-auto">
-        {/* Label and Title */}
         <div className="mb-24">
           <div className="label mb-6">SERVICES</div>
-          <h2 className="display text-[clamp(3rem,6vw,5.5rem)]">
-            The <em className="serif-italic">systems.</em>
-          </h2>
-          <p className="body mt-8 opacity-60">Every system. Carefully built for long-term dominance.</p>
+          <h2 className="display text-[clamp(3.5rem,7vw,6.5rem)] mb-16">What we do</h2>
         </div>
 
-        {/* List Style Layout */}
-        <div ref={gridRef} className="flex flex-col border-t border-[var(--border)]">
-          {services.map((service, i) => (
-            <Link 
-              key={i} 
-              href={service.href}
-              className="service-card group relative py-12 border-b border-[var(--border)] transition-all duration-500 hover:px-8"
-            >
-              {/* Gold Accent Dot (Hidden by default, reveal on hover) */}
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-[var(--accent)] rounded-full opacity-0 -translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0" />
-
-              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-                <div className="flex items-start gap-12">
-                   <div className="font-[var(--font-mono)] text-[0.65rem] text-[var(--accent)] tracking-widest pt-2">{service.id}</div>
-                   <div>
-                     <h3 className="font-[var(--font-cormorant)] text-[2.5rem] lg:text-[3.5rem] font-light leading-none text-[var(--white)] group-hover:italic transition-all duration-500">
-                       {service.title}
-                     </h3>
-                     <p className="body mt-4 max-w-lg opacity-40 group-hover:opacity-100 transition-opacity">
-                       {service.desc}
-                     </p>
-                   </div>
-                </div>
-
-                <div className="flex items-center gap-6">
-                  <div className="hidden lg:block w-[120px] h-[1px] bg-[var(--border)] group-hover:bg-[var(--accent)] group-hover:w-[180px] transition-all duration-700" />
-                  <div className="font-[var(--font-mono)] text-[var(--accent)] text-[1.2rem] transition-transform duration-500 group-hover:translate-x-4">
-                    →
-                  </div>
-                </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 border-t border-[var(--border-light)]">
+          {services.map((service, index) => (
+            <div key={service.id} className="py-8 border-b border-[var(--border-light)] relative group">
+              {/* Index */}
+              <div className="text-[1.2rem] font-[var(--font-cormorant)] text-[var(--text-white)] opacity-20 mb-4">
+                {String(service.id).padStart(2, '0')}
               </div>
-            </Link>
+              
+              {/* Gold Dot */}
+              <div className="absolute top-8 right-8 w-2 h-2 bg-[var(--accent-gold)] rounded-full opacity-60 group-hover:opacity-100 transition-opacity"></div>
+              
+              {/* Content */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-4 mb-4">
+                  <service.icon className="w-5 h-5 text-[var(--accent-gold)]" />
+                  <h3 className="text-[1.5rem] font-[var(--font-cormorant)] text-[var(--text-white)]">
+                    {service.title}
+                  </h3>
+                </div>
+                <p className="body text-[var(--text-gray)] max-w-xs">
+                  {service.desc}
+                </p>
+              </div>
+              
+              <Link 
+                href={service.href}
+                className="text-[var(--accent-gold)] font-[var(--font-mono)] text-[0.7rem] tracking-[0.3em] uppercase group-hover:tracking-widest transition-all"
+              >
+                LEARN MORE →
+              </Link>
+            </div>
           ))}
         </div>
       </div>
