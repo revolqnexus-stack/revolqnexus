@@ -17,37 +17,39 @@ const team = [
 
 export default function TeamSection() {
   return (
-    <section className="relative z-10 py-[10rem] px-[2rem] sm:px-[5rem] bg-[var(--ink2)]">
+    <section className="relative z-10 py-[12rem] px-[2rem] sm:px-[5rem] bg-[var(--ink)]">
       <div className="max-w-7xl mx-auto flex flex-col items-center">
-        <div className="text-center mb-16">
-          <div className="label mb-4">THE TEAM</div>
-          <h2 className="h2 mb-4">Two people. One system.</h2>
-          <p className="body text-[var(--fog)]">We build together. We ship together.</p>
+        <div className="text-center mb-24">
+          <div className="label mb-6">THE DIRECTORS</div>
+          <h2 className="display text-[clamp(3.5rem,7vw,6.5rem)] mb-10">The <em className="serif-italic">founders.</em></h2>
+          <p className="body text-[var(--fog)] mx-auto opacity-60 italic">Two people. One uncompromising system.</p>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-5xl mb-16">
+-
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 w-full max-w-5xl mb-24">
           {team.map((member, i) => (
-            <div key={i} className="group flex flex-col bg-[var(--ink3)] border border-[var(--border)] transition-all duration-400 hover:border-[var(--rose)]">
+            <div key={i} className="group flex flex-col transition-all duration-700">
               <RevealImage 
                 src={member.image}
                 alt={member.name}
                 aspect="aspect-[4/5]"
+                className="grayscale group-hover:grayscale-0 transition-all duration-1000"
               />
-              <div className="p-[2rem]">
-                <h3 className="font-[var(--font-cormorant)] text-[2rem] font-light text-[var(--white)] leading-none mb-2">{member.name}</h3>
-                <div className="font-[var(--font-mono)] text-[0.62rem] text-[var(--rose)] tracking-[0.35em] uppercase">{member.role}</div>
+              <div className="pt-10 text-center md:text-left">
+                <h3 className="font-[var(--font-cormorant)] text-[2.8rem] font-light text-[var(--white)] leading-none mb-4 group-hover:italic transition-all duration-500">{member.name}</h3>
+                <div className="label text-[var(--accent)] opacity-60 tracking-[0.4em]">{member.role}</div>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="max-w-2xl text-center">
-           <p className="body text-[var(--fog)] text-lg leading-relaxed mb-6">
+        <div className="max-w-3xl text-center border-t border-[var(--border)] pt-16">
+           <p className="body text-[var(--fog)] text-lg leading-relaxed mb-10 opacity-60">
              REVOLQ is the combined vision of two people who got tired of watching good businesses in Kerala get ignored online. We don&apos;t build websites; we build digital systems that capture attention and convert it into growth.
            </p>
-           <p className="body text-[var(--dim)] italic">
-             Ajmal Mullapati & Eathen Baby • Co-founders (Equal)
-           </p>
+           <div className="font-[var(--font-cormorant)] text-[1.5rem] text-[var(--white)] font-light italic opacity-80">
+             Ajmal Mullapati & Eathen Baby
+           </div>
+           <div className="label text-[var(--accent)] mt-3 opacity-40">CO-FOUNDERS</div>
         </div>
       </div>
     </section>

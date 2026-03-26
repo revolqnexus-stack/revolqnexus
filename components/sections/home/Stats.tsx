@@ -44,19 +44,19 @@ export default function Stats() {
   return (
     <section ref={sectionRef} className="relative z-10 border-t border-[var(--border)] bg-[var(--border)] grid grid-cols-2 lg:grid-cols-4 gap-[1px]">
       {stats.map((stat, i) => (
-        <div key={i} className="bg-[var(--ink)] py-[4rem] px-[2rem] text-center">
+        <div key={i} className="bg-[var(--ink)] py-[6rem] px-[2rem] text-center border-r last:border-r-0 border-[var(--border)]">
           <div className="flex justify-center items-baseline gap-1">
             <span 
-              className="stat-number font-[var(--font-cormorant)] text-[clamp(2.5rem,6vw,5.5rem)] font-light text-[var(--white)] leading-none"
+              className="stat-number font-[var(--font-cormorant)] text-[clamp(2.5rem,6vw,5.5rem)] font-light text-[var(--white)] leading-none italic"
               data-target={stat.value}
             >
               0
             </span>
-            <span className="font-[var(--font-cormorant)] text-[2rem] font-light text-[var(--white)] opacity-60">
+            <span className="font-[var(--font-cormorant)] text-[2.2rem] font-light text-[var(--accent)] opacity-80">
               {stat.suffix}
             </span>
           </div>
-          <div className="font-[var(--font-mono)] text-[0.62rem] tracking-[0.35em] text-[var(--fog)] mt-4 uppercase">
+          <div className="label mt-8 text-[var(--fog)] opacity-40">
             {stat.label}
           </div>
         </div>

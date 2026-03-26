@@ -83,53 +83,47 @@ export default function ServicesGrid() {
   }, [])
 
   return (
-    <section className="relative z-10 py-[10rem] px-[2rem] sm:px-[5rem]">
+    <section className="relative z-10 py-[12rem] px-[2rem] sm:px-[5rem] border-b border-[var(--border)]">
       <div className="max-w-7xl mx-auto">
         {/* Label and Title */}
-        <div className="mb-16">
-          <div className="label mb-4">WHAT WE DO</div>
-          <h2 className="h2 max-w-2xl">
-            <SplitText text="Every system." />
-            <em>Carefully built.</em>
+        <div className="mb-24">
+          <div className="label mb-6">SERVICES</div>
+          <h2 className="display text-[clamp(3rem,6vw,5.5rem)]">
+            The <em className="serif-italic">systems.</em>
           </h2>
+          <p className="body mt-8 opacity-60">Every system. Carefully built for long-term dominance.</p>
         </div>
 
-        {/* 2x3 Grid */}
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 bg-[var(--border)] gap-[1px]">
+        {/* List Style Layout */}
+        <div ref={gridRef} className="flex flex-col border-t border-[var(--border)]">
           {services.map((service, i) => (
             <Link 
               key={i} 
               href={service.href}
-              className="service-card group relative bg-[var(--ink3)] p-[3rem] transition-colors duration-400 hover:bg-[var(--ink4)] flex flex-col min-h-[400px]"
+              className="service-card group relative py-12 border-b border-[var(--border)] transition-all duration-500 hover:px-8"
             >
-              {/* Left Accent Border */}
-              <div className="absolute left-0 top-0 bottom-0 w-0 bg-[var(--accent)] transition-all duration-400 group-hover:w-[2px] z-10" />
+              {/* Gold Accent Dot (Hidden by default, reveal on hover) */}
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-[var(--accent)] rounded-full opacity-0 -translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0" />
 
-              {/* Background Image Overlay */}
-              <div 
-                className="absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-700 bg-cover bg-center grayscale"
-                style={{ backgroundImage: `url(${service.image})` }}
-              />
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+                <div className="flex items-start gap-12">
+                   <div className="font-[var(--font-mono)] text-[0.65rem] text-[var(--accent)] tracking-widest pt-2">{service.id}</div>
+                   <div>
+                     <h3 className="font-[var(--font-cormorant)] text-[2.5rem] lg:text-[3.5rem] font-light leading-none text-[var(--white)] group-hover:italic transition-all duration-500">
+                       {service.title}
+                     </h3>
+                     <p className="body mt-4 max-w-lg opacity-40 group-hover:opacity-100 transition-opacity">
+                       {service.desc}
+                     </p>
+                   </div>
+                </div>
 
-              {/* Number and Icon */}
-              <div className="flex justify-between items-start mb-12">
-                <span className="font-[var(--font-mono)] text-[0.7rem] text-[var(--accent2)] tracking-widest">{service.id}</span>
-                <service.icon size={20} className="text-[var(--fog)] group-hover:text-[var(--white)] transition-colors duration-400" />
-              </div>
-
-              {/* Title and Body */}
-              <div className="mt-auto">
-                <h3 className="h3 mb-4 group-hover:text-[var(--white)] transition-colors duration-400 leading-tight">
-                  {service.title}
-                </h3>
-                <p className="body text-[0.85rem] line-clamp-3">
-                  {service.desc}
-                </p>
-              </div>
-
-              {/* Arrow */}
-              <div className="absolute bottom-8 right-8 font-[var(--font-mono)] text-[var(--accent2)] text-[1.4rem] transition-transform duration-400 group-hover:translate-x-2">
-                →
+                <div className="flex items-center gap-6">
+                  <div className="hidden lg:block w-[120px] h-[1px] bg-[var(--border)] group-hover:bg-[var(--accent)] group-hover:w-[180px] transition-all duration-700" />
+                  <div className="font-[var(--font-mono)] text-[var(--accent)] text-[1.2rem] transition-transform duration-500 group-hover:translate-x-4">
+                    →
+                  </div>
+                </div>
               </div>
             </Link>
           ))}

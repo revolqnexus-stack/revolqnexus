@@ -107,28 +107,28 @@ export default function AuroraBackground() {
         float noise = n1*0.5 + n2*0.28 + n3 + n4;
         noise = noise * 0.5 + 0.5;
 
-        vec3 colA = vec3(0.005, 0.005, 0.015); // Deep Black
-        vec3 colB = vec3(0.48, 0.22, 0.93);   // Electric Purple (#7c3aed)
-        vec3 colC = vec3(0.23, 0.51, 0.96);   // Electric Blue (#3b82f6)
-        vec3 colD = vec3(0.08, 0.05, 0.25);   // Deep Indigo
-        vec3 colE = vec3(0.02, 0.04, 0.12);   // Ambient Blue
+        vec3 colA = vec3(0.002, 0.002, 0.005); // True Ink Black
+        vec3 colB = vec3(0.65, 0.55, 0.25);   // Editorial Gold (#cfb53b - subdued)
+        vec3 colC = vec3(0.12, 0.08, 0.05);   // Warm Bronze
+        vec3 colD = vec3(0.015, 0.012, 0.02); // Deep Shadow
+        vec3 colE = vec3(0.005, 0.005, 0.008); // Ambient Ink
 
         float sectionBlend = sin(sc * 3.14159);
-        vec3 col = mix(colA, colB, smoothstep(0.2, 0.58, noise));
-        col = mix(col, colC, smoothstep(0.58, 0.82, noise)*0.55);
-        col = mix(col, colD, smoothstep(0.0, 0.2, noise)*0.5);
-        col = mix(col, colE, sectionBlend*0.3);
+        vec3 col = mix(colA, colB, smoothstep(0.3, 0.7, noise)*0.15); // Subdued gold glow
+        col = mix(col, colC, smoothstep(0.6, 0.9, noise)*0.2);
+        col = mix(col, colD, smoothstep(0.0, 0.3, noise)*0.4);
+        col = mix(col, colE, sectionBlend*0.2);
 
-        float vig = 1.0 - length((uv-0.5)*1.7);
-        vig = smoothstep(0.0, 0.85, vig);
+        float vig = 1.0 - length((uv-0.5)*1.5);
+        vig = smoothstep(0.0, 0.8, vig);
         col *= vig;
 
         float bandY = 0.5 - sc*0.3;
-        float band = exp(-pow((uv.y-bandY)*3.5, 2.0))*0.2;
-        col += vec3(band*0.35, band*0.12, band*0.22);
+        float band = exp(-pow((uv.y-bandY)*4.0, 2.0))*0.08;
+        col += vec3(band*0.4, band*0.35, band*0.2);
 
-        float grid = step(0.998, fract(uv.x*20.0))*0.02 + step(0.998, fract(uv.y*14.0))*0.015;
-        col += vec3(grid*(0.3+noise*0.2));
+        float grid = step(0.999, fract(uv.x*25.0))*0.01 + step(0.999, fract(uv.y*18.0))*0.008;
+        col += vec3(grid*(0.1+noise*0.1));
 
         gl_FragColor = vec4(col, 0.98);
       }

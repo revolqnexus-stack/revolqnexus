@@ -4,16 +4,16 @@ export default function Marquee() {
   const items = ["DIGITAL SYSTEMS", "WEB DEVELOPMENT", "SEO & GBP", "AI AUTOMATION", "BRAND STRATEGY"]
 
   return (
-    <section className="relative z-10 border-y border-[var(--border)] py-[1.4rem] bg-[var(--glass)] overflow-hidden">
-      <div className="flex flex-col gap-4">
+    <section className="relative z-10 border-y border-[var(--border)] py-[2rem] bg-transparent overflow-hidden">
+      <div className="flex flex-col gap-8">
         {/* Track 1: Forward */}
         <div className="flex whitespace-nowrap animate-marquee">
           {[...Array(4)].map((_, i) => (
             <div key={i} className="flex items-center">
               {items.map((item, j) => (
-                <div key={j} className="flex items-center mx-[2rem]">
-                  <span className="font-[var(--font-cormorant)] italic text-[1.2rem] text-[var(--fog)] opacity-30 tracking-widest">{item}</span>
-                  <span className="mx-[2rem] text-[var(--rose)] opacity-50">◆</span>
+                <div key={j} className="flex items-center mx-[4rem]">
+                  <span className="font-[var(--font-cormorant)] text-[clamp(1.5rem,3vw,2.5rem)] text-[var(--white)] opacity-20 tracking-[0.2em] font-light uppercase">{item}</span>
+                  <span className="mx-[4rem] text-[var(--accent)] opacity-40 text-xl font-light">◇</span>
                 </div>
               ))}
             </div>
@@ -25,9 +25,9 @@ export default function Marquee() {
           {[...Array(4)].map((_, i) => (
             <div key={i} className="flex items-center">
               {[...items].reverse().map((item, j) => (
-                <div key={j} className="flex items-center mx-[2rem]">
-                  <span className="font-[var(--font-cormorant)] italic text-[1.2rem] text-[var(--fog)] opacity-30 tracking-widest">{item}</span>
-                  <span className="mx-[2rem] text-[var(--rose)] opacity-50">◆</span>
+                <div key={j} className="flex items-center mx-[4rem]">
+                  <span className="font-[var(--font-cormorant)] italic text-[clamp(1.5rem,3vw,2.5rem)] text-[var(--white)] opacity-10 tracking-[0.15em] font-light uppercase">{item}</span>
+                  <span className="mx-[4rem] text-[var(--accent)] opacity-20 text-xl font-light">◇</span>
                 </div>
               ))}
             </div>
@@ -45,10 +45,10 @@ export default function Marquee() {
           100% { transform: translateX(0); }
         }
         .animate-marquee {
-          animation: marquee 40s linear infinite;
+          animation: marquee 80s linear infinite;
         }
         .animate-marquee-reverse {
-          animation: marquee-reverse 40s linear infinite;
+          animation: marquee-reverse 100s linear infinite;
         }
         section:hover .animate-marquee,
         section:hover .animate-marquee-reverse {

@@ -13,31 +13,35 @@ export default function Hero() {
 # (line 16)
       {/* Main Headline */}
       <div className="max-w-6xl mx-auto">
-        <h1 className="display mb-6">
-          <SplitText text="We build" className="justify-center" />
-          <div className="italic text-[var(--gold)]">
-            <SplitText text="digital systems" className="justify-center" />
+        <h1 className="display mb-10">
+          <SplitText text="Websites that" className="justify-center" />
+          <div>
+            <SplitText text="rank, " className="justify-center inline" />
+            <em className="serif-italic">
+              <SplitText text="convert" className="justify-center inline" />
+            </em>
+            <SplitText text="," className="justify-center inline" />
           </div>
-          <SplitText text="that work." className="justify-center" />
+          <SplitText text="and scale." className="justify-center" />
         </h1>
 
         {/* Sub Text */}
-        <p className="body max-w-lg mx-auto mb-12">
-          Web development, SEO, AI automation, and brand strategy for businesses that refuse to be invisible.
+        <p className="body max-w-xl mx-auto mb-16 px-4">
+          The complete, Next-backed digital systems engine for <em>ambitious</em> goals. Precision-crafted for those who refuse to be invisible.
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 px-4">
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 px-4">
           <MagneticButton
             href="/contact"
-            className="px-[2.8rem] py-[1rem] bg-[var(--accent)] text-[var(--white)] font-[var(--font-mono)] text-[0.65rem] tracking-[0.2em] uppercase hover:bg-[var(--accent2)] transition-colors"
+            className="px-[3.2rem] py-[1.2rem] bg-[var(--accent)] text-[var(--ink)] font-[var(--font-mono)] text-[0.68rem] font-bold tracking-[0.25em] uppercase hover:bg-[var(--white)] transition-colors"
           >
             START A PROJECT
           </MagneticButton>
 
           <MagneticButton
             href="/work"
-            className="px-[2.8rem] py-[1rem] border border-[var(--border2)] text-[var(--fog)] font-[var(--font-mono)] text-[0.65rem] tracking-[0.2em] uppercase hover:text-[var(--white)] hover:border-[var(--accent2)] transition-colors"
+            className="px-[3.2rem] py-[1.2rem] border border-[var(--border)] text-[var(--fog)] font-[var(--font-mono)] text-[0.68rem] tracking-[0.25em] uppercase hover:text-[var(--white)] hover:border-[var(--accent)] transition-colors"
           >
             SEE OUR WORK
           </MagneticButton>

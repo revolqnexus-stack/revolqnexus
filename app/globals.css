@@ -2,34 +2,33 @@
 
 :root {
   /* Backgrounds */
-  --ink:     #020205;   /* deep black — based on User screenshots */
+  --ink:     #050505;   /* deep ink black */
   --ink2:    #0a0a0f;   /* secondary bg */
   --ink3:    #12121e;   /* card bg */
   --ink4:    #1a1a2e;   /* elevated card bg */
   
   /* Text */
-  --white:   #f8faff;   /* crisp white */
-  --fog:     #94a3b8;   /* secondary text — gray-blue */
+  --white:   #fdfdfd;   /* pristine off-white */
+  --fog:     #94a3b8;   /* secondary text */
   --dim:     #475569;   /* tertiary text */
   
-  /* Accent — Electric Theme */
-  --accent:  #7c3aed;   /* Electric Purple */
-  --accent2: #3b82f6;   /* Electric Blue */
-  --accent3: #0ea5e9;   /* Cyan */
-  --rose:    #f43f5e;   /* Vibrant Rose */
-  --rose2:   #fb7185;   /* Lighter Rose */
-  --gold:    #fbbf24;   /* Electric Gold */
-  --glow:    rgba(124, 58, 237, 0.4);
+  /* Accent — Editorial Theme */
+  --accent:  #cfb53b;   /* Editorial Gold */
+  --accent2: #f43f5e;   /* Rose / Highlight */
+  --accent3: #7c3aed;   /* Electric Purple (subtle) */
+  --gold:    #cfb53b;
+  --rose:    #f43f5e;
+  --glow:    rgba(207, 181, 59, 0.2);
   
   --nav-height: 80px;
   
   /* Borders */
-  --border:  rgba(255, 255, 255, 0.08);
-  --border2: rgba(59, 130, 246, 0.2); /* blue tint border */
+  --border:  rgba(255, 255, 255, 0.05);
+  --border2: rgba(207, 181, 59, 0.1); 
   
   /* Glass */
-  --glass:   rgba(10, 10, 15, 0.6);
-  --glass2:  rgba(15, 23, 42, 0.8);
+  --glass:   rgba(5, 5, 5, 0.7);
+  --glass2:  rgba(10, 10, 15, 0.8);
 }
 
 * {
@@ -52,62 +51,68 @@ body {
 
 .display {
   font-family: var(--font-cormorant), serif;
-  font-size: clamp(4.2rem, 9.5vw, 8.5rem);
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
   font-weight: 300;
-  line-height: 0.9;
-  letter-spacing: -0.02em;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  color: var(--white);
 }
 
 .display em {
   font-style: italic;
-  color: var(--accent); /* purple accent for italics */
+  font-weight: 300;
+  color: var(--accent); /* Gold for emphasis */
 }
 
 .h1 {
   font-family: var(--font-cormorant), serif;
-  font-size: clamp(2.8rem, 6vw, 4.8rem);
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
   font-weight: 300;
-  line-height: 0.95;
+  line-height: 1.0;
 }
 
 .h2 {
   font-family: var(--font-cormorant), serif;
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
   font-weight: 300;
   line-height: 1.1;
+  letter-spacing: -0.01em;
 }
 
 .h2 em {
-  font-style: italic; color: var(--accent2);
-  display: block;
+  font-style: italic; 
+  color: var(--accent);
 }
 
 .h3 {
   font-family: var(--font-cormorant), serif;
-  font-size: clamp(1.4rem, 2vw, 2rem);
+  font-size: clamp(1.2rem, 1.8vw, 1.6rem);
   font-weight: 300;
+  letter-spacing: 0.02em;
 }
 
 .label {
   font-family: var(--font-mono), monospace;
-  font-size: 0.62rem;
-  font-weight: 300;
-  letter-spacing: 0.5em;
+  font-size: 0.58rem;
+  font-weight: 400;
+  letter-spacing: 0.4em;
   text-transform: uppercase;
-  color: var(--accent2);
+  color: var(--accent);
+  opacity: 0.8;
 }
 
 .body {
   font-family: var(--font-jost), sans-serif;
-  font-size: 0.92rem;
-  font-weight: 200;
-  line-height: 1.9;
+  font-size: 0.88rem;
+  font-weight: 300;
+  line-height: 1.7;
   color: var(--fog);
+  max-width: 60ch;
 }
 
 .mono {
   font-family: var(--font-mono), monospace;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 300;
   letter-spacing: 0.1em;
 }

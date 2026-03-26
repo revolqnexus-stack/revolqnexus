@@ -29,46 +29,47 @@ const packages = [
 
 export default function PricingSection() {
   return (
-    <section className="relative z-10 py-[10rem] px-[2rem] sm:px-[5rem]">
+    <section className="relative z-10 py-[12rem] px-[2rem] sm:px-[5rem]">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16">
-          <div className="label mb-4">INVESTMENT</div>
-          <h2 className="h2 mb-4">Transparent pricing. No surprises.</h2>
+        <div className="mb-20 text-center">
+          <div className="label mb-6">INVESTMENT</div>
+          <h2 className="display text-[clamp(2.5rem,5vw,4.5rem)]">
+            Investment in <br />
+            <em className="serif-italic">Excellence.</em>
+          </h2>
+          <p className="body mx-auto mt-8 opacity-60">
+            Precision-built systems require deliberate investment. We build <br className="hidden md:block" />
+            assets, not just websites.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch pt-8">
           {packages.map((pkg, i) => (
             <div 
               key={i} 
-              className={`flex flex-col p-[2.5rem] sm:p-[3rem] border transition-all duration-500 ${
+              className={`flex flex-col p-[3rem] border transition-all duration-700 ${
                 pkg.featured 
-                ? 'bg-[var(--ink4)] border-[var(--rose)] scale-[1.03] z-20 relative shadow-2xl shadow-[var(--ink)]' 
-                : 'bg-[var(--ink3)] border-[var(--border)] z-10'
+                ? 'bg-[#0a0a0f] border-[var(--accent)] z-20 relative shadow-2xl' 
+                : 'bg-transparent border-[var(--border)] z-10'
               }`}
             >
               {pkg.featured && (
-                <div className="absolute top-0 right-[2rem] -translate-y-1/2 bg-[var(--rose)] text-[var(--ink)] font-[var(--font-mono)] text-[0.55rem] tracking-widest uppercase px-3 py-1">
-                  POPULAR
+                <div className="absolute top-0 left-0 bg-[var(--accent)] text-[var(--ink)] font-[var(--font-mono)] text-[0.55rem] tracking-[0.3em] font-bold uppercase px-4 py-1.5">
+                  THE ENGINE
                 </div>
               )}
 
-              <div className="font-[var(--font-mono)] text-[0.65rem] text-[var(--rose)] tracking-[0.4em] uppercase mb-4">{pkg.name}</div>
-              <div className="font-[var(--font-cormorant)] text-[clamp(2.5rem,4vw,4rem)] font-light text-[var(--white)] leading-none mb-2">{pkg.price}</div>
-              <div className="font-[var(--font-jost)] text-[0.85rem] font-extralight text-[var(--fog)] mb-8">{pkg.sub}</div>
+              <div className="font-[var(--font-mono)] text-[0.6rem] text-[var(--accent)] tracking-[0.4em] uppercase mb-8">{pkg.name}</div>
+              <div className="font-[var(--font-cormorant)] text-[3.2rem] font-light text-[var(--white)] leading-none mb-4 italic">{pkg.price}</div>
+              <div className="font-[var(--font-jost)] text-[0.8rem] font-light text-[var(--fog)] mb-10 opacity-70 italic">Starting from</div>
               
-              <div className="w-full h-[1px] bg-[var(--border)] mb-8" />
+              <div className="w-full h-[1px] bg-[var(--border)] mb-10" />
 
-              <div className="flex flex-col gap-4 mb-12">
+              <div className="flex flex-col gap-5 mb-14">
                 {pkg.features.map((f, j) => (
-                  <div key={j} className="flex items-start gap-3 border-b border-[var(--border)] pb-4">
-                    <span className="text-[var(--rose)] text-[0.7rem]">✓</span>
-                    <span className="font-[var(--font-mono)] text-[0.72rem] text-[var(--fog)] uppercase">{f}</span>
-                  </div>
-                ))}
-                {pkg.excluded.map((f, j) => (
-                  <div key={j} className="flex items-start gap-3 opacity-30">
-                    <span className="text-[var(--dim)] text-[0.7rem]">—</span>
-                    <span className="font-[var(--font-mono)] text-[0.72rem] text-[var(--dim)] uppercase">{f}</span>
+                  <div key={j} className="flex items-start gap-4">
+                    <span className="text-[var(--accent)] text-[0.7rem] pt-1">◇</span>
+                    <span className="font-[var(--font-mono)] text-[0.65rem] text-[var(--fog)] uppercase tracking-widest">{f}</span>
                   </div>
                 ))}
               </div>
@@ -76,13 +77,13 @@ export default function PricingSection() {
               <div className="mt-auto">
                 <MagneticButton
                   href="/contact"
-                  className={`w-full text-center py-[1rem] font-[var(--font-mono)] text-[0.7rem] tracking-widest uppercase transition-colors ${
+                  className={`w-full text-center py-[1.2rem] font-[var(--font-mono)] text-[0.65rem] tracking-[0.3em] font-bold uppercase transition-all duration-500 ${
                     pkg.featured 
-                    ? 'bg-[var(--rose)] text-[var(--ink)] hover:bg-[var(--rose2)]' 
-                    : 'border border-[var(--border2)] text-[var(--fog)] hover:text-[var(--white)] hover:border-[var(--rose)]'
+                    ? 'bg-[var(--accent)] text-[var(--ink)] hover:bg-[var(--white)]' 
+                    : 'border border-[var(--border)] text-[var(--fog)] hover:text-[var(--white)] hover:border-[var(--accent)]'
                   }`}
                 >
-                  START NOW
+                  INQUIRE NOW
                 </MagneticButton>
               </div>
             </div>
