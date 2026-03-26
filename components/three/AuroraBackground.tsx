@@ -107,11 +107,11 @@ export default function AuroraBackground() {
         float noise = n1*0.5 + n2*0.28 + n3 + n4;
         noise = noise * 0.5 + 0.5;
 
-        vec3 colA = vec3(0.03, 0.03, 0.08);
-        vec3 colB = vec3(0.22, 0.10, 0.18);
-        vec3 colC = vec3(0.42, 0.26, 0.12);
-        vec3 colD = vec3(0.08, 0.06, 0.18);
-        vec3 colE = vec3(0.04, 0.08, 0.15);
+        vec3 colA = vec3(0.005, 0.005, 0.015); // Deep Black
+        vec3 colB = vec3(0.48, 0.22, 0.93);   // Electric Purple (#7c3aed)
+        vec3 colC = vec3(0.23, 0.51, 0.96);   // Electric Blue (#3b82f6)
+        vec3 colD = vec3(0.08, 0.05, 0.25);   // Deep Indigo
+        vec3 colE = vec3(0.02, 0.04, 0.12);   // Ambient Blue
 
         float sectionBlend = sin(sc * 3.14159);
         vec3 col = mix(colA, colB, smoothstep(0.2, 0.58, noise));

@@ -1,3 +1,5 @@
+'use client'
+
 import dynamic from 'next/dynamic'
 import ServiceHero from '@/components/sections/shared/ServiceHero'
 import ServiceDeliverables from '@/components/sections/shared/ServiceDeliverables'

@@ -72,12 +72,12 @@ export default function Cursor() {
       <div 
         ref={dotRef}
         id="cursor-dot"
-        className="fixed top-0 left-0 w-[6px] h-[6px] bg-[var(--rose2)] rounded-full pointer-events-none z-[9999] mix-blend-difference hidden sm:block"
+        className="fixed top-0 left-0 w-[6px] h-[6px] bg-[var(--accent2)] rounded-full pointer-events-none z-[9999] mix-blend-difference hidden sm:block"
       />
       <div 
         ref={ringRef}
         id="cursor-ring"
-        className="fixed top-0 left-0 w-[40px] h-[40px] border border-[rgba(196,154,154,0.3)] rounded-full pointer-events-none z-[9998] transition-[width,height,opacity] duration-300 hidden sm:block"
+        className="fixed top-0 left-0 w-[40px] h-[40px] border border-[rgba(124,58,237,0.3)] rounded-full pointer-events-none z-[9998] transition-[width,height,opacity] duration-300 hidden sm:block shadow-[0_0_15px_rgba(124,58,237,0.1)]"
       />
     </>
   )

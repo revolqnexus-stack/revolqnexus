@@ -14,7 +14,7 @@ export default function Footer() {
 
       <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-[3rem] relative z-10">
         <div>
-          <h4 className="font-[var(--font-mono)] text-[0.7rem] text-[var(--rose)] tracking-[0.2em] mb-8 uppercase">NAVIGATE</h4>
+          <h4 className="font-[var(--font-mono)] text-[0.7rem] text-[var(--accent2)] tracking-[0.2em] mb-8 uppercase">NAVIGATE</h4>
           <ul className="flex flex-col gap-4">
             <li><Link href="/work" className="font-[var(--font-jost)] text-[0.9rem] text-[var(--fog)] hover:text-[var(--white)] transition-colors">Work</Link></li>
             <li><Link href="/services" className="font-[var(--font-jost)] text-[0.9rem] text-[var(--fog)] hover:text-[var(--white)] transition-colors">Services</Link></li>
@@ -24,7 +24,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="font-[var(--font-mono)] text-[0.7rem] text-[var(--rose)] tracking-[0.2em] mb-8 uppercase">SERVICES</h4>
+          <h4 className="font-[var(--font-mono)] text-[0.7rem] text-[var(--accent2)] tracking-[0.2em] mb-8 uppercase">SERVICES</h4>
           <ul className="flex flex-col gap-4">
             <li><Link href="/services/web-development" className="font-[var(--font-jost)] text-[0.9rem] text-[var(--fog)] hover:text-[var(--white)] transition-colors">Web Development</Link></li>
             <li><Link href="/services/seo-gbp" className="font-[var(--font-jost)] text-[0.9rem] text-[var(--fog)] hover:text-[var(--white)] transition-colors">SEO & GBP</Link></li>
@@ -34,7 +34,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="font-[var(--font-mono)] text-[0.7rem] text-[var(--rose)] tracking-[0.2em] mb-8 uppercase">CONTACT</h4>
+          <h4 className="font-[var(--font-mono)] text-[0.7rem] text-[var(--accent2)] tracking-[0.2em] mb-8 uppercase">CONTACT</h4>
           <ul className="flex flex-col gap-4">
             <li className="font-[var(--font-jost)] text-[0.9rem] text-[var(--fog)]">+91 79956 17374</li>
             <li className="font-[var(--font-jost)] text-[0.9rem] text-[var(--fog)]">+91 73060 85895</li>
@@ -43,7 +43,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="font-[var(--font-mono)] text-[0.7rem] text-[var(--rose)] tracking-[0.2em] mb-8 uppercase">LEGAL</h4>
+          <h4 className="font-[var(--font-mono)] text-[0.7rem] text-[var(--accent2)] tracking-[0.2em] mb-8 uppercase">LEGAL</h4>
           <ul className="flex flex-col gap-4">
             <li><Link href="/privacy" className="font-[var(--font-jost)] text-[0.9rem] text-[var(--fog)] hover:text-[var(--white)] transition-colors">Privacy Policy</Link></li>
             <li><Link href="/terms" className="font-[var(--font-jost)] text-[0.9rem] text-[var(--fog)] hover:text-[var(--white)] transition-colors">Terms of Service</Link></li>

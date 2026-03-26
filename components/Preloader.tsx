@@ -20,9 +20,21 @@ export default function Preloader() {
 
     const ctx = gsap.context(() => {
       const audioCtx = createAudioContext()
+      
+      // Global click/touch to resume audio context
+      const resumeAudio = () => {
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume()
+        }
+      }
+      window.addEventListener('mousedown', resumeAudio)
+      window.addEventListener('touchstart', resumeAudio)
+
       const tl = gsap.timeline({
         onComplete: () => {
           sessionStorage.setItem('revolq_visited', '1')
+          window.removeEventListener('mousedown', resumeAudio)
+          window.removeEventListener('touchstart', resumeAudio)
           setComplete(true)
         }
       })
@@ -122,7 +134,7 @@ export default function Preloader() {
 
         {/* Phase 4: Line & Tagline */}
         <div className="flex flex-col items-center mt-4">
-          <div ref={lineRef} className="h-[1px] bg-[var(--rose)] w-0" />
+          <div ref={lineRef} className="h-[1px] bg-[var(--accent2)] w-0" />
           <div ref={taglineRef} className="opacity-0 translate-y-4 mt-4">
             <span className="font-[var(--font-mono)] text-[0.6rem] tracking-[0.5em] text-[var(--fog)] uppercase">
               DIGITAL AGENCY · KERALA · INDIA

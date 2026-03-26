@@ -1,38 +1,35 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   /* Backgrounds */
-  --ink:     #05050a;   /* primary bg — near black */
-  --ink2:    #0c0c14;   /* secondary bg — slightly lighter */
-  --ink3:    #111119;   /* card bg */
-  --ink4:    #1a1a24;   /* elevated card bg */
+  --ink:     #020205;   /* deep black — based on User screenshots */
+  --ink2:    #0a0a0f;   /* secondary bg */
+  --ink3:    #12121e;   /* card bg */
+  --ink4:    #1a1a2e;   /* elevated card bg */
   
   /* Text */
-  --white:   #f0ecf5;   /* primary text — warm white */
-  --fog:     #a8a4b8;   /* secondary text — muted purple-gray */
-  --dim:     #5a5870;   /* tertiary text — very muted */
+  --white:   #f8faff;   /* crisp white */
+  --fog:     #94a3b8;   /* secondary text — gray-blue */
+  --dim:     #475569;   /* tertiary text */
   
-  /* Accent */
-  --rose:    #c49a9a;   /* primary accent */
-  --rose2:   #e8b4b4;   /* lighter rose — hover states */
-  --gold:    #d4b070;   /* secondary accent — italic headings */
-  --violet:  #6b5fa8;   /* tertiary accent */
+  /* Accent — Electric Theme */
+  --accent:  #7c3aed;   /* Electric Purple */
+  --accent2: #3b82f6;   /* Electric Blue */
+  --accent3: #0ea5e9;   /* Cyan */
+  --glow:    rgba(124, 58, 237, 0.4);
   
   /* Borders */
-  --border:  rgba(255,255,255,0.07);
-  --border2: rgba(255,255,255,0.12);
+  --border:  rgba(255, 255, 255, 0.08);
+  --border2: rgba(59, 130, 246, 0.2); /* blue tint border */
   
   /* Glass */
-  --glass:   rgba(255,255,255,0.03);
-  --glass2:  rgba(255,255,255,0.05);
+  --glass:   rgba(10, 10, 15, 0.6);
+  --glass2:  rgba(15, 23, 42, 0.8);
 }
 
 * {
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+  padding: 0; margin: 0;
 }
 
 body {
@@ -48,7 +45,6 @@ body {
    TYPOGRAPHY SYSTEM
    ═══════════════════════════════════════════════════════════ */
 
-/* Display — hero headlines */
 .display {
   font-family: var(--font-cormorant), serif;
   font-size: clamp(5.5rem, 13vw, 12rem);
@@ -59,10 +55,9 @@ body {
 
 .display em {
   font-style: italic;
-  color: var(--gold);
+  color: var(--accent); /* purple accent for italics */
 }
 
-/* H1 */
 .h1 {
   font-family: var(--font-cormorant), serif;
   font-size: clamp(3rem, 6vw, 6rem);
@@ -70,7 +65,6 @@ body {
   line-height: 0.92;
 }
 
-/* H2 — section titles */
 .h2 {
   font-family: var(--font-cormorant), serif;
   font-size: clamp(2.2rem, 4vw, 4.5rem);
@@ -79,29 +73,25 @@ body {
 }
 
 .h2 em {
-  font-style: italic;
-  color: var(--gold);
+  font-style: italic; color: var(--accent2);
   display: block;
 }
 
-/* H3 — card titles */
 .h3 {
   font-family: var(--font-cormorant), serif;
   font-size: clamp(1.4rem, 2vw, 2rem);
   font-weight: 300;
 }
 
-/* Section label */
 .label {
   font-family: var(--font-mono), monospace;
   font-size: 0.62rem;
   font-weight: 300;
   letter-spacing: 0.5em;
   text-transform: uppercase;
-  color: var(--rose);
+  color: var(--accent2);
 }
 
-/* Body */
 .body {
   font-family: var(--font-jost), sans-serif;
   font-size: 0.92rem;
@@ -110,7 +100,6 @@ body {
   color: var(--fog);
 }
 
-/* Mono UI */
 .mono {
   font-family: var(--font-mono), monospace;
   font-size: 0.7rem;
@@ -119,24 +108,38 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   UTILITIES
+   UTILITIES & ANIMATIONS
    ═══════════════════════════════════════════════════════════ */
 
 .bg-ink { background-color: var(--ink); }
 .bg-ink2 { background-color: var(--ink2); }
-.bg-ink3 { background-color: var(--ink3); }
-.bg-ink4 { background-color: var(--ink4); }
+.bg-accent { background-color: var(--accent); }
+.bg-accent2 { background-color: var(--accent2); }
 
 .text-white { color: var(--white); }
-.text-fog { color: var(--fog); }
-.text-dim { color: var(--dim); }
-.text-rose { color: var(--rose); }
-.text-gold { color: var(--gold); }
+.text-accent { color: var(--accent); }
+.text-accent2 { color: var(--accent2); }
 
 .border-subtle { border: 1px solid var(--border); }
-.border-rose { border: 1px solid var(--rose); }
+.border-accent { border: 1px solid var(--accent); }
 
-/* Liquid Background Container */
+.btn-primary {
+  @apply px-11 py-4 bg-[var(--accent)] text-[var(--white)] font-[var(--font-mono)] text-[0.65rem] tracking-[0.2em] uppercase transition-all duration-500 shadow-xl shadow-[var(--glow)];
+}
+
+.btn-primary:hover {
+  background-color: var(--accent2);
+}
+
+.btn-secondary {
+  @apply px-11 py-4 border border-[var(--border2)] text-[var(--fog)] font-[var(--font-mono)] text-[0.65rem] tracking-[0.2em] uppercase transition-all duration-500;
+}
+
+.btn-secondary:hover {
+  color: var(--white);
+  border-color: var(--accent2);
+}
+
 #liquid-canvas-container {
   position: fixed;
   inset: 0;

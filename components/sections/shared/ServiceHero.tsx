@@ -20,18 +20,20 @@ export default function ServiceHero({ label, title, sub }: ServiceHeroProps) {
            <span className="text-[var(--rose)]">{label.split('—')[1] || label}</span>
         </div>
 
+        <div className="max-w-4xl">
         {/* Label */}
-        <div className="label mb-6">{label}</div>
+        <div className="label mb-6 text-[var(--accent2)] animate-pulse">{label}</div>
 
         {/* Title */}
-        <h1 className="h1 max-w-4xl mb-8 leading-tight">
-          <SplitText text={title} />
+        <h1 className="h1 text-[var(--white)] mb-8 leading-tight">
+          {title}
         </h1>
 
         {/* Sub */}
-        <p className="body text-lg text-[var(--fog)] max-w-xl">
+        <p className="body text-xl max-w-2xl text-[var(--fog)]">
           {sub}
         </p>
+      </div>
       </div>
     </section>
   )

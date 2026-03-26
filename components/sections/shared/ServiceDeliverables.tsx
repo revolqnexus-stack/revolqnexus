@@ -13,11 +13,9 @@ export default function ServiceDeliverables({ title = "What's included", items }
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
           {items.map((item, i) => (
-            <div key={i} className="flex items-start gap-4 py-4 border-b border-[var(--border)]">
-              <span className="text-[var(--rose)] text-[0.8rem] mt-1">✓</span>
-              <span className="font-[var(--font-mono)] text-[0.75rem] text-[var(--fog)] uppercase tracking-wider leading-relaxed">
-                {item}
-              </span>
+            <div key={i} className="flex items-center gap-6 p-8 bg-[var(--ink3)] border border-[var(--border)] group hover:border-[var(--accent2)] transition-colors">
+              <div className="w-2 h-2 rounded-full bg-[var(--accent2)] shadow-[0_0_10px_var(--accent2)]" />
+              <span className="font-[var(--font-mono)] text-[0.7rem] uppercase tracking-wider text-[var(--white)]">{item}</span>
             </div>
           ))}
         </div>

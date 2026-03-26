@@ -58,7 +58,7 @@ export default function Nav() {
         <div className="hidden sm:block">
           <MagneticButton 
             href="/contact"
-            className="px-[1.8rem] py-[0.6rem] bg-[var(--rose)] text-[var(--ink)] font-[var(--font-mono)] text-[0.65rem] tracking-[0.1em] uppercase hover:bg-[var(--rose2)] transition-colors"
+            className="px-[1.8rem] py-[0.6rem] bg-[var(--accent)] text-[var(--white)] font-[var(--font-mono)] text-[0.65rem] tracking-[0.1em] uppercase hover:bg-[var(--accent2)] transition-colors shadow-lg shadow-[var(--glow)]"
           >
             LET'S TALK
           </MagneticButton>
@@ -92,7 +92,7 @@ export default function Nav() {
             <Link 
               href="/contact"
               onClick={() => setIsMenuOpen(false)}
-              className="mt-8 px-[2.8rem] py-[1rem] border border-[var(--rose)] text-[var(--rose)] font-[var(--font-mono)] text-[0.7rem] tracking-[0.2em] uppercase"
+              className="mt-8 px-[2.8rem] py-[1rem] border border-[var(--accent)] text-[var(--accent)] font-[var(--font-mono)] text-[0.7rem] tracking-[0.2em] uppercase"
             >
               START A PROJECT
             </Link>

@@ -30,14 +30,14 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 px-4">
           <MagneticButton
             href="/contact"
-            className="px-[2.8rem] py-[1rem] bg-[var(--rose)] text-[var(--ink)] font-[var(--font-mono)] text-[0.65rem] tracking-[0.2em] uppercase hover:bg-[var(--rose2)] transition-colors"
+            className="px-[2.8rem] py-[1rem] bg-[var(--accent)] text-[var(--white)] font-[var(--font-mono)] text-[0.65rem] tracking-[0.2em] uppercase hover:bg-[var(--accent2)] transition-colors"
           >
             START A PROJECT
           </MagneticButton>
 
           <MagneticButton
             href="/work"
-            className="px-[2.8rem] py-[1rem] border border-[var(--border2)] text-[var(--fog)] font-[var(--font-mono)] text-[0.65rem] tracking-[0.2em] uppercase hover:text-[var(--white)] hover:border-[var(--rose)] transition-colors"
+            className="px-[2.8rem] py-[1rem] border border-[var(--border2)] text-[var(--fog)] font-[var(--font-mono)] text-[0.65rem] tracking-[0.2em] uppercase hover:text-[var(--white)] hover:border-[var(--accent2)] transition-colors"
           >
             SEE OUR WORK
           </MagneticButton>
@@ -52,7 +52,7 @@ export default function Hero() {
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center">
         <span className="font-[var(--font-mono)] text-[0.55rem] text-[var(--dim)] tracking-[0.2em] uppercase mb-4">SCROLL</span>
-        <div className="w-[1px] h-[60px] bg-gradient-to-bottom from-[var(--rose)] to-transparent animate-pulse" />
+        <div className="w-[1px] h-[60px] bg-gradient-to-bottom from-[var(--accent)] to-transparent animate-pulse" />
       </div>
     </section>
   )

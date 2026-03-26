@@ -97,11 +97,11 @@ export default function ServicesGrid() {
               className="service-card group relative bg-[var(--ink3)] p-[3rem] transition-colors duration-400 hover:bg-[var(--ink4)] flex flex-col min-h-[400px]"
             >
               {/* Left Accent Border */}
-              <div className="absolute left-0 top-0 bottom-0 w-0 bg-[var(--rose)] transition-all duration-400 group-hover:w-[2px]" />
+              <div className="absolute left-0 top-0 bottom-0 w-0 bg-[var(--accent)] transition-all duration-400 group-hover:w-[2px]" />
 
               {/* Number and Icon */}
               <div className="flex justify-between items-start mb-12">
-                <span className="font-[var(--font-mono)] text-[0.6rem] text-[var(--rose)] tracking-widest">{service.id}</span>
+                <span className="font-[var(--font-mono)] text-[0.6rem] text-[var(--accent2)] tracking-widest">{service.id}</span>
                 <service.icon size={20} className="text-[var(--fog)] group-hover:text-[var(--white)] transition-colors duration-400" />
               </div>
 
@@ -116,7 +116,7 @@ export default function ServicesGrid() {
               </div>
 
               {/* Arrow */}
-              <div className="mt-8 self-end font-[var(--font-mono)] text-[var(--rose)] text-[1.2rem] transition-transform duration-400 group-hover:translate-x-2">
+              <div className="mt-8 self-end font-[var(--font-mono)] text-[var(--accent2)] text-[1.2rem] transition-transform duration-400 group-hover:translate-x-2">
                 →
               </div>
             </Link>
