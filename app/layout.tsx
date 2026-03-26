@@ -1,56 +1,36 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, Jost, DM_Mono } from 'next/font/google'
+import { Playfair_Display, Inter } from 'next/font/google'
 import './globals.css'
 import LenisProvider from '@/lib/lenis'
-import Cursor from '@/components/ui/Cursor'
-import Grain from '@/components/ui/Grain'
-import ProgressBar from '@/components/ui/ProgressBar'
 import Nav from '@/components/layout/Nav'
 import Footer from '@/components/layout/Footer'
-import JsonLd from '@/components/JsonLd'
 import { GoogleAnalytics } from '@next/third-parties/google'
 
-const cormorant = Cormorant_Garamond({
+const serif = Playfair_Display({
   subsets: ['latin'],
   weight: '400',
-  style: 'normal',
-  variable: '--font-cormorant',
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
   display: 'swap',
 })
 
-const jost = Jost({
+const sans = Inter({
   subsets: ['latin'],
-  weight: '400',
-  variable: '--font-jost',
-  display: 'swap',
-})
-
-const dmMono = DM_Mono({
-  subsets: ['latin'],
-  weight: '400',
-  variable: '--font-mono',
+  weight: ['400', '500'],
+  variable: '--font-sans',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
   title: {
-    default: 'REVOLQ — Digital Agency, Kerala',
+    default: 'REVOLQ — Digital Agency',
     template: '%s | REVOLQ'
   },
-  description: 'REVOLQ is a digital agency in Kerala building Next.js websites, SEO systems, and AI automations for businesses that refuse to be invisible.',
-  keywords: [
-    'digital agency Kerala',
-    'web development Kerala', 
-    'SEO agency Kottayam',
-    'AI automation India',
-    'Next.js agency Kerala',
-    'WhatsApp automation',
-    'Google Business Profile Kerala'
-  ],
+  description: 'Building systems that work. Electric brutalism meets digital excellence.',
   metadataBase: new URL('https://revolq.in'),
   openGraph: {
-    title: 'REVOLQ — Digital Agency, Kerala',
-    description: 'We build digital systems that work while you sleep.',
+    title: 'REVOLQ — Digital Agency',
+    description: 'Building systems that work.',
     url: 'https://revolq.in',
     siteName: 'REVOLQ',
     images: [{ 
@@ -63,7 +43,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'REVOLQ — Digital Agency, Kerala',
+    title: 'REVOLQ — Digital Agency',
     images: ['/og-image.jpg'],
   },
   robots: { index: true, follow: true }
@@ -75,15 +55,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${jost.variable} ${dmMono.variable}`}>
+    <html lang="en" className={`${serif.variable} ${sans.variable}`}>
       <body>
-        <JsonLd />
-        <Grain />
-        <ProgressBar />
-        <Cursor />
+        {/* Liquid Background */}
+        <div className="liquid-bg">
+          <div className="blob blob-1"></div>
+          <div className="blob blob-2"></div>
+          <div className="blob blob-3"></div>
+        </div>
+        
         <LenisProvider>
           <Nav />
-          <main className="min-h-screen">{children}</main>
+          <main>{children}</main>
           <Footer />
         </LenisProvider>
         <GoogleAnalytics gaId="REPLACE_WITH_GA_ID" />

@@ -3,155 +3,70 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import MagneticButton from '@/components/ui/MagneticButton'
-import { Menu, X, Phone } from 'lucide-react'
 
 export default function Nav() {
-  const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 80)
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  const isActive = (path: string) => {
-    if (path === '/' && pathname === '/') return true
-    if (path !== '/' && pathname.startsWith(path)) return true
-    return false
-  }
-
-  const navLinks = [
-    { href: '/work', label: 'WORK' },
-    { href: '/services', label: 'SERVICES' },
-    { href: '/about', label: 'ABOUT' },
-  ]
-
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-[200] transition-all duration-300 ${
-          scrolled ? 'bg-[rgba(5,5,10,0.85)] backdrop-blur-[20px] border-b border-[var(--border)]' : ''
-        }`}
-        style={{
-          padding: '1.8rem 3.5rem',
-        }}
-      >
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <Link 
-            href="/"
-            className="font-cormorant text-[1.4rem] font-light tracking-[0.35em] text-[var(--text)] hover:text-[var(--rose)] transition-colors"
-            style={{ fontFamily: 'var(--font-cormorant)' }}
-          >
-            REVOLQ
-          </Link>
+      <nav className="fixed top-0 left-0 right-0 z-[100] flex justify-between items-center px-8 py-6">
+        {/* Logo */}
+        <Link 
+          href="/"
+          className="display-text text-[2rem] font-normal text-[var(--text-light)] hover:text-[var(--fluid-blue)] transition-colors"
+        >
+          REVOLQ
+        </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <div className="flex items-center gap-6">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`font-mono text-[0.62rem] font-light tracking-[0.3em] uppercase transition-all ${
-                    isActive(link.href) 
-                      ? 'text-[var(--text)] opacity-100' 
-                      : 'text-[var(--text-muted)] opacity-60 hover:text-[var(--text)] hover:opacity-100'
-                  }`}
-                  style={{ fontFamily: 'var(--font-mono)' }}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-
-            <div className="flex items-center gap-4">
-              <a 
-                href="tel:+917995617374"
-                className="text-[var(--text-muted)] hover:text-[var(--text)] transition-colors text-sm"
-              >
-                +91 79956 17374
-              </a>
-              
-              <MagneticButton
-                href="/contact"
-                className="px-[2.8rem] py-[1rem] bg-[var(--rose)] text-[var(--ink)] font-mono text-[0.65rem] font-light tracking-[0.2em] uppercase hover:bg-[var(--rose2)] transition-colors"
-                style={{ fontFamily: 'var(--font-mono)' }}
-              >
-                LET'S TALK
-              </MagneticButton>
-            </div>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-[var(--text)] p-2"
-            data-cursor="hoverable"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+        {/* Menu Button */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="text-[var(--text-light)] font-sans text-sm uppercase tracking-[0.2em] hover:text-[var(--fluid-blue)] transition-colors"
+        >
+          {mobileMenuOpen ? 'CLOSE' : 'MENU'}
+        </button>
       </nav>
 
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <div 
-          className="fixed inset-0 z-[199] bg-[var(--ink)] md:hidden"
-          style={{
-            background: 'var(--ink)',
-          }}
-        >
-          <div className="flex flex-col items-center justify-center h-full gap-12">
-            <button
+        <div className="fixed inset-0 z-[99] bg-[var(--bg-black)] flex items-center justify-center">
+          <button
+            onClick={() => setMobileMenuOpen(false)}
+            className="absolute top-8 right-8 text-[var(--text-light)] text-2xl"
+          >
+            ×
+          </button>
+          
+          <div className="text-center space-y-8">
+            <Link
+              href="/work"
               onClick={() => setMobileMenuOpen(false)}
-              className="absolute top-8 right-8 text-[var(--text)] p-2"
-              data-cursor="hoverable"
+              className="block display-text text-[4rem] text-[var(--text-light)] hover:text-[var(--fluid-blue)] transition-colors"
             >
-              <X size={24} />
-            </button>
-
-            {navLinks.map((link, index) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`font-cormorant text-[clamp(3rem,10vw,6rem)] font-light transition-all ${
-                  isActive(link.href) ? 'text-[var(--rose)]' : 'text-[var(--text)]'
-                }`}
-                style={{ 
-                  fontFamily: 'var(--font-cormorant)',
-                  animationDelay: `${index * 0.1}s`,
-                }}
-              >
-                {link.label}
-              </Link>
-            ))}
-
-            <div className="flex flex-col items-center gap-6 mt-8">
-              <a 
-                href="tel:+917995617374"
-                className="text-[var(--text-muted)] hover:text-[var(--text)] transition-colors text-lg flex items-center gap-2"
-              >
-                <Phone size={20} />
-                +91 79956 17374
-              </a>
-              
-              <MagneticButton
-                href="/contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-[2.8rem] py-[1rem] bg-[var(--rose)] text-[var(--ink)] font-mono text-[0.65rem] font-light tracking-[0.2em] uppercase hover:bg-[var(--rose2)] transition-colors"
-                style={{ fontFamily: 'var(--font-mono)' }}
-              >
-                LET'S TALK
-              </MagneticButton>
-            </div>
+              Work
+            </Link>
+            <Link
+              href="/services"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block display-text text-[4rem] text-[var(--text-light)] hover:text-[var(--fluid-blue)] transition-colors"
+            >
+              Services
+            </Link>
+            <Link
+              href="/about"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block display-text text-[4rem] text-[var(--text-light)] hover:text-[var(--fluid-blue)] transition-colors"
+            >
+              About
+            </Link>
+            <Link
+              href="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block display-text text-[4rem] text-[var(--text-light)] hover:text-[var(--fluid-blue)] transition-colors"
+            >
+              Contact
+            </Link>
           </div>
         </div>
       )}
