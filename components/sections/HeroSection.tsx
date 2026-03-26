@@ -56,36 +56,39 @@ export default function HeroSection() {
   return (
     <section 
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center text-center px-8 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Label */}
-      <div className="absolute top-24 left-1/2 transform -translate-x-1/2">
-        <span className="font-sans text-xs uppercase tracking-[0.3em] text-[var(--fluid-cyan)]">
-          KERALA · INDIA · DIGITAL SYSTEMS
-        </span>
-      </div>
+      {/* Hero Content Container - Proper Flexbox Structure */}
+      <div className="flex flex-col items-center justify-center text-center px-8 pt-32 min-h-screen">
+        {/* Label */}
+        <div className="absolute top-8 left-1/2 transform -translate-x-1/2">
+          <span className="font-sans text-xs uppercase tracking-[0.3em] text-[var(--fluid-cobalt)]">
+            KERALA · INDIA · DIGITAL SYSTEMS
+          </span>
+        </div>
 
-      {/* Main Headline */}
-      <div className="space-y-4">
-        <h1 className="hero-line overflow-hidden">
-          <div className="display-text font-sans text-[var(--text-light)]">
-            Building systems
-          </div>
-        </h1>
-        <h1 className="hero-line overflow-hidden">
-          <div className="display-text italic text-outline-blue">
-            that work.
-          </div>
-        </h1>
-      </div>
+        {/* Main Headline */}
+        <div className="space-y-2 max-w-6xl mx-auto">
+          <h1 className="hero-line overflow-hidden">
+            <div className="display-text hero font-sans text-[var(--text-light)]">
+              Building systems
+            </div>
+          </h1>
+          <h1 className="hero-line overflow-hidden">
+            <div className="display-text hero italic text-outline-ultramarine">
+              that work.
+            </div>
+          </h1>
+        </div>
 
-      {/* Sub Text */}
-      <div 
-        className="hero-sub opacity-0 translate-y-8 max-w-2xl mx-auto mt-12"
-      >
-        <p className="body-text text-[var(--text-muted-dark)]">
-          Electric brutalism meets digital excellence. We build systems that dominate attention and deliver results.
-        </p>
+        {/* Sub Text */}
+        <div 
+          className="hero-sub opacity-0 translate-y-8 max-w-2xl mx-auto mt-12"
+        >
+          <p className="body-text text-[var(--text-muted-dark)]">
+            Electric brutalism meets digital excellence. We build systems that dominate attention and deliver results.
+          </p>
+        </div>
       </div>
     </section>
   )

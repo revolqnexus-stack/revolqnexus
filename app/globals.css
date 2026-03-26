@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  /* THE LEEROY PALETTE */
+  /* PREMIUM ULTRAMARINE PALETTE */
   --bg-black: #000000;       /* Absolute dark */
   --bg-sand: #F2EFE9;        /* Warm light mode background */
   
-  --fluid-blue: #0A24FF;     /* The core electric blue */
-  --fluid-cyan: #00E5FF;     /* Secondary highlight */
-  --fluid-purple: #4D00FF;   /* Depth color for the liquid */
+  --fluid-ultramarine: #1E3A8A;     /* Deep premium blue */
+  --fluid-cobalt: #0047AB;        /* Rich cobalt blue */
+  --fluid-midnight: #0F172A;      /* Dark depth for gradients */
 
   --text-light: #FFFFFF;
   --text-dark: #111111;
@@ -45,10 +45,10 @@ body.theme-light {
 
 .display-text {
   font-family: var(--font-serif), serif;
-  font-size: clamp(4rem, 12vw, 14rem);
+  font-size: clamp(2.5rem, 8vw, 6rem);  /* Corrected for mobile */
   font-weight: 400;
   line-height: 0.85;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;  /* Reduced for better readability */
   text-transform: none;
 }
 
@@ -57,10 +57,14 @@ body.theme-light {
   font-weight: 300;
 }
 
+.display-text.hero {
+  font-size: clamp(3rem, 10vw, 8rem);  /* Hero-specific larger size */
+}
+
 .body-text {
   font-family: var(--font-sans), sans-serif;
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-  line-height: 1.5;
+  font-size: clamp(0.875rem, 1.2vw, 1rem);  /* More reasonable body text */
+  line-height: 1.6;
   font-weight: 400;
 }
 
@@ -98,7 +102,7 @@ body.theme-light .liquid-bg {
 .blob-1 {
   width: 60vw;
   height: 60vw;
-  background: var(--fluid-blue);
+  background: var(--fluid-ultramarine);
   top: -10%;
   left: -10%;
   animation: float 14s infinite ease-in-out alternate;
@@ -107,7 +111,7 @@ body.theme-light .liquid-bg {
 .blob-2 {
   width: 50vw;
   height: 50vw;
-  background: var(--fluid-cyan);
+  background: var(--fluid-cobalt);
   bottom: -20%;
   right: -10%;
   animation: float-reverse 18s infinite ease-in-out alternate;
@@ -116,7 +120,7 @@ body.theme-light .liquid-bg {
 .blob-3 {
   width: 40vw;
   height: 40vw;
-  background: var(--fluid-purple);
+  background: var(--fluid-midnight);
   top: 30%;
   left: 30%;
   animation: float 22s infinite ease-in-out alternate;
@@ -177,10 +181,10 @@ html {
   overflow: hidden;
 }
 
-.text-outline-blue {
+.text-outline-ultramarine {
   text-shadow: 
-    -1px -1px 0 var(--fluid-blue),
-    1px -1px 0 var(--fluid-blue),
-    -1px 1px 0 var(--fluid-blue),
-    1px 1px 0 var(--fluid-blue);
+    -1px -1px 0 var(--fluid-ultramarine),
+    1px -1px 0 var(--fluid-ultramarine),
+    -1px 1px 0 var(--fluid-ultramarine),
+    1px 1px 0 var(--fluid-ultramarine);
 }

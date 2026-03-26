@@ -4,6 +4,7 @@ import './globals.css'
 import LenisProvider from '@/lib/lenis'
 import Nav from '@/components/layout/Nav'
 import Footer from '@/components/layout/Footer'
+import Preloader from '@/components/Preloader'
 import { GoogleAnalytics } from '@next/third-parties/google'
 
 const serif = Playfair_Display({
@@ -65,6 +66,7 @@ export default function RootLayout({
         </div>
         
         <LenisProvider>
+          <Preloader />
           <Nav />
           <main>{children}</main>
           <Footer />
