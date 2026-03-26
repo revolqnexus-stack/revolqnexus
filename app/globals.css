@@ -11,9 +11,9 @@
   --ink4:    #1a1a24;   /* elevated card bg */
   
   /* Text */
-  --white:   #f0ecf5;   /* primary text — warm white */
-  --fog:     #a8a4b8;   /* secondary text — muted purple-gray */
-  --dim:     #5a5870;   /* tertiary text — very muted */
+  --text:    #f0ecf5;   /* primary text — warm white */
+  --text-muted: #a8a4b8;   /* secondary text — muted purple-gray */
+  --text-dim: #5a5870;   /* tertiary text — very muted */
   
   /* Accent */
   --rose:    #c49a9a;   /* primary accent */
@@ -42,12 +42,18 @@ html {
 
 body {
   background-color: var(--ink);
-  color: var(--white);
+  color: var(--text);
   font-family: var(--font-jost), sans-serif;
   font-weight: 200;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Main content wrapper */
+main {
+  min-height: 100vh;
 }
 
 /* Typography System */

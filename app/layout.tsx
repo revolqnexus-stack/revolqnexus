@@ -83,7 +83,7 @@ export default function RootLayout({
         <Cursor />
         <LenisProvider>
           <Nav />
-          <main>{children}</main>
+          <main className="min-h-screen">{children}</main>
           <Footer />
         </LenisProvider>
         <GoogleAnalytics gaId="REPLACE_WITH_GA_ID" />

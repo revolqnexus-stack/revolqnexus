@@ -147,7 +147,7 @@ export default function HeroSection() {
             fontSize: '0.92rem',
             fontWeight: 200,
             lineHeight: 1.9,
-            color: 'var(--fog)',
+            color: 'var(--text-muted)',
             maxWidth: '420px',
           }}
         >
@@ -172,7 +172,7 @@ export default function HeroSection() {
 
           <MagneticButton
             href="/work"
-            className="hero-button opacity-0 translate-y-6 px-[2.8rem] py-[1rem] border border-[var(--border2)] text-[var(--fog)] hover:text-[var(--white)] hover:border-[var(--rose)] transition-colors"
+            className="hero-button opacity-0 translate-y-6 px-[2.8rem] py-[1rem] border border-[var(--border2)] text-[var(--text-muted)] hover:text-[var(--text)] hover:border-[var(--rose)] transition-colors"
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '0.65rem',
@@ -196,7 +196,7 @@ export default function HeroSection() {
           fontFamily: 'var(--font-mono)',
           fontSize: '0.6rem',
           fontWeight: 300,
-          color: 'var(--dim)',
+          color: 'var(--text-dim)',
           writingMode: 'vertical-rl',
           textOrientation: 'mixed',
         }}
@@ -220,7 +220,7 @@ export default function HeroSection() {
             fontFamily: 'var(--font-mono)',
             fontSize: '0.55rem',
             fontWeight: 300,
-            color: 'var(--dim)',
+            color: 'var(--text-dim)',
             letterSpacing: '0.2em',
             textTransform: 'uppercase',
           }}

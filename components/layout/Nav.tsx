@@ -46,7 +46,7 @@ export default function Nav() {
           {/* Logo */}
           <Link 
             href="/"
-            className="font-cormorant text-[1.4rem] font-light tracking-[0.35em] text-[var(--white)] hover:text-[var(--rose)] transition-colors"
+            className="font-cormorant text-[1.4rem] font-light tracking-[0.35em] text-[var(--text)] hover:text-[var(--rose)] transition-colors"
             style={{ fontFamily: 'var(--font-cormorant)' }}
           >
             REVOLQ
@@ -61,8 +61,8 @@ export default function Nav() {
                   href={link.href}
                   className={`font-mono text-[0.62rem] font-light tracking-[0.3em] uppercase transition-all ${
                     isActive(link.href) 
-                      ? 'text-[var(--white)] opacity-100' 
-                      : 'text-[var(--fog)] opacity-60 hover:text-[var(--white)] hover:opacity-100'
+                      ? 'text-[var(--text)] opacity-100' 
+                      : 'text-[var(--text-muted)] opacity-60 hover:text-[var(--text)] hover:opacity-100'
                   }`}
                   style={{ fontFamily: 'var(--font-mono)' }}
                 >
@@ -74,7 +74,7 @@ export default function Nav() {
             <div className="flex items-center gap-4">
               <a 
                 href="tel:+917995617374"
-                className="text-[var(--fog)] hover:text-[var(--white)] transition-colors text-sm"
+                className="text-[var(--text-muted)] hover:text-[var(--text)] transition-colors text-sm"
               >
                 +91 79956 17374
               </a>
@@ -92,7 +92,7 @@ export default function Nav() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-[var(--white)] p-2"
+            className="md:hidden text-[var(--text)] p-2"
             data-cursor="hoverable"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -111,7 +111,7 @@ export default function Nav() {
           <div className="flex flex-col items-center justify-center h-full gap-12">
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="absolute top-8 right-8 text-[var(--white)] p-2"
+              className="absolute top-8 right-8 text-[var(--text)] p-2"
               data-cursor="hoverable"
             >
               <X size={24} />
@@ -123,7 +123,7 @@ export default function Nav() {
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`font-cormorant text-[clamp(3rem,10vw,6rem)] font-light transition-all ${
-                  isActive(link.href) ? 'text-[var(--rose)]' : 'text-[var(--white)]'
+                  isActive(link.href) ? 'text-[var(--rose)]' : 'text-[var(--text)]'
                 }`}
                 style={{ 
                   fontFamily: 'var(--font-cormorant)',
@@ -137,7 +137,7 @@ export default function Nav() {
             <div className="flex flex-col items-center gap-6 mt-8">
               <a 
                 href="tel:+917995617374"
-                className="text-[var(--fog)] hover:text-[var(--white)] transition-colors text-lg flex items-center gap-2"
+                className="text-[var(--text-muted)] hover:text-[var(--text)] transition-colors text-lg flex items-center gap-2"
               >
                 <Phone size={20} />
                 +91 79956 17374
