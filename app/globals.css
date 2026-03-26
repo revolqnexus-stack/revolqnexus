@@ -1,0 +1,164 @@
+/* Tailwind CSS directives - required for framework functionality */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Backgrounds */
+  --ink:     #05050a;   /* primary bg — near black */
+  --ink2:    #0c0c14;   /* secondary bg — slightly lighter */
+  --ink3:    #111119;   /* card bg */
+  --ink4:    #1a1a24;   /* elevated card bg */
+  
+  /* Text */
+  --white:   #f0ecf5;   /* primary text — warm white */
+  --fog:     #a8a4b8;   /* secondary text — muted purple-gray */
+  --dim:     #5a5870;   /* tertiary text — very muted */
+  
+  /* Accent */
+  --rose:    #c49a9a;   /* primary accent */
+  --rose2:   #e8b4b4;   /* lighter rose — hover states */
+  --gold:    #d4b070;   /* secondary accent — italic headings */
+  --violet:  #6b5fa8;   /* tertiary accent */
+  
+  /* Borders */
+  --border:  rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  
+  /* Glass */
+  --glass:   rgba(255,255,255,0.03);
+  --glass2:  rgba(255,255,255,0.05);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--ink);
+  color: var(--white);
+  font-family: var(--font-jost), sans-serif;
+  font-weight: 200;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Typography System */
+.display {
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(5.5rem, 13vw, 12rem);
+  font-weight: 300;
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+}
+
+.h1 {
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 300;
+  line-height: 0.92;
+}
+
+.h2 {
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(2.2rem, 4vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.0;
+}
+
+.h3 {
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  font-weight: 300;
+}
+
+.label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.62rem;
+  font-weight: 300;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+
+.body {
+  font-family: var(--font-jost), sans-serif;
+  font-size: 0.92rem;
+  font-weight: 200;
+  line-height: 1.9;
+  color: var(--fog);
+}
+
+.mono {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+
+/* Italic gold text pattern */
+h2 em, h1 em, h3 em {
+  font-style: italic;
+  color: var(--gold);
+  display: block;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ink);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--rose);
+}
+
+/* Selection */
+::selection {
+  background: var(--rose);
+  color: var(--ink);
+}
+
+/* Focus styles */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 2px;
+}
+
+/* Hide cursor on touch devices */
+@media (hover: none) {
+  #cursor-dot,
+  #cursor-ring {
+    display: none !important;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

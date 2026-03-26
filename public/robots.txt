@@ -1,0 +1,12 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Host
+Host: https://revolq.in
+
+# Sitemaps
+Sitemap: https://revolq.in/sitemap.xml
+Sitemap: https://revolq.in/server-sitemap.xml
