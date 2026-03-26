@@ -5,15 +5,15 @@ import MagneticButton from '@/components/ui/MagneticButton'
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-center text-center px-8 z-10 overflow-hidden">
+    <section className="relative min-h-screen flex flex-col justify-center items-center text-center px-8 z-10 overflow-hidden pt-[var(--nav-height)]">
       {/* Label */}
-      <div className="label mb-8">
+      <div className="label mb-6 mt-12">
         KERALA · INDIA · DIGITAL AGENCY
       </div>
-
+# (line 16)
       {/* Main Headline */}
       <div className="max-w-6xl mx-auto">
-        <h1 className="display mb-8">
+        <h1 className="display mb-6">
           <SplitText text="We build" className="justify-center" />
           <div className="italic text-[var(--gold)]">
             <SplitText text="digital systems" className="justify-center" />

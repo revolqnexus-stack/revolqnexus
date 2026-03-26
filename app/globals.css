@@ -18,6 +18,8 @@
   --accent3: #0ea5e9;   /* Cyan */
   --glow:    rgba(124, 58, 237, 0.4);
   
+  --nav-height: 80px;
+  
   /* Borders */
   --border:  rgba(255, 255, 255, 0.08);
   --border2: rgba(59, 130, 246, 0.2); /* blue tint border */
@@ -47,9 +49,9 @@ body {
 
 .display {
   font-family: var(--font-cormorant), serif;
-  font-size: clamp(5.5rem, 13vw, 12rem);
+  font-size: clamp(4.2rem, 9.5vw, 8.5rem);
   font-weight: 300;
-  line-height: 0.88;
+  line-height: 0.9;
   letter-spacing: -0.02em;
 }
 
@@ -60,16 +62,16 @@ body {
 
 .h1 {
   font-family: var(--font-cormorant), serif;
-  font-size: clamp(3rem, 6vw, 6rem);
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
   font-weight: 300;
-  line-height: 0.92;
+  line-height: 0.95;
 }
 
 .h2 {
   font-family: var(--font-cormorant), serif;
-  font-size: clamp(2.2rem, 4vw, 4.5rem);
+  font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 300;
-  line-height: 1.0;
+  line-height: 1.1;
 }
 
 .h2 em {

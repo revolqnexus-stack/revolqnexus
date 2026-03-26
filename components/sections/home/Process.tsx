@@ -56,7 +56,7 @@ export default function Process() {
           {steps.map((step, i) => (
             <div key={i} className="grid grid-cols-1 md:grid-cols-[120px_1fr] border-b border-[var(--border)] py-[4rem] group transition-colors duration-400 hover:bg-[var(--glass)]">
               {/* Left: Huge Number */}
-              <div className="font-[var(--font-cormorant)] text-[8rem] font-light leading-none text-[var(--white)] opacity-[0.08] transition-opacity duration-400 group-hover:opacity-20 mb-4 md:mb-0">
+              <div className="font-[var(--font-cormorant)] text-[clamp(6rem,12vw,10rem)] font-light leading-none text-[var(--white)] opacity-[0.03] transition-opacity duration-400 group-hover:opacity-10 mb-4 md:mb-0">
                 {step.id}
               </div>
 

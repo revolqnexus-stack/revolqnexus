@@ -17,9 +17,9 @@ export default function WorkPreview() {
         {/* NIXTUDIO Card */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[4rem] items-center p-[2rem] sm:p-[4rem] bg-[var(--ink3)] border border-[var(--border)] mb-[4rem] group transition-all duration-500 hover:border-[var(--rose)]">
           <RevealImage 
-            src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=1200&q=80"
-            alt="NIXTUDIO Bridal Makeup"
-            aspect="aspect-[4/3]"
+            src="/nixtudio_mockup.png"
+            alt="NIXTUDIO Digital Dashboard Mockup"
+            aspect="aspect-[16/10]"
           />
 
           <div className="flex flex-col gap-8">

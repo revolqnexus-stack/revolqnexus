@@ -27,8 +27,8 @@ export default function Nav() {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-[200] px-[1.5rem] sm:px-[3.5rem] py-[1.8rem] flex justify-between items-center transition-all duration-500 ${
-        isScrolled ? 'bg-[rgba(5,5,10,0.85)] backdrop-blur-[20px] border-b border-[var(--border)] py-[1.2rem]' : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-[1000] px-[1.5rem] sm:px-[3.5rem] py-[1.8rem] flex justify-between items-center transition-all duration-500 ${
+        isScrolled ? 'bg-[var(--ink)] shadow-[0_4px_30px_rgba(0,0,0,0.3)] border-b border-[rgba(59,130,246,0.1)] py-[1rem]' : 'bg-transparent'
       }`}
     >
       {/* Left: Logo */}

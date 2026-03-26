@@ -12,8 +12,10 @@ export default function CTASection() {
           Ready to grow?
         </h2>
 
-        <p className="body text-[var(--fog)] max-w-md mx-auto mb-12 text-lg">
-          Your competitors are online. Your customers are searching. Let&apos;s make sure they find you.
+        <p className="body text-[var(--fog)] max-w-xl mx-auto mb-12 text-lg">
+          Your competitors are already online. Your customers are already searching. 
+          While you wait, someone else is taking your market share. 
+          Let&apos;s build the system that makes you impossible to ignore.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-6 items-center">
@@ -30,6 +32,9 @@ export default function CTASection() {
           >
             WHATSAPP US
           </MagneticButton>
+        </div>
+        <div className="mt-20 opacity-40">
+          <div className="label text-[0.5rem]">KOTTAYAM • KERALA • INDIA</div>
         </div>
       </div>
     </section>

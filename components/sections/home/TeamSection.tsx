@@ -6,12 +6,12 @@ const team = [
   {
     name: 'Ajmal Mullapati',
     role: 'CO-FOUNDER',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80'
+    image: '/founder_ajmal.png'
   },
   {
     name: 'Eathen Baby',
     role: 'CO-FOUNDER',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80'
+    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80'
   }
 ]
 
@@ -41,9 +41,12 @@ export default function TeamSection() {
           ))}
         </div>
 
-        <div className="max-w-xl text-center">
-           <p className="body text-[var(--fog)] text-lg leading-relaxed">
-             REVOLQ is two people who got tired of watching good businesses in Kerala get ignored online. We started building systems that change that.
+        <div className="max-w-2xl text-center">
+           <p className="body text-[var(--fog)] text-lg leading-relaxed mb-6">
+             REVOLQ is the combined vision of two people who got tired of watching good businesses in Kerala get ignored online. We don&apos;t build websites; we build digital systems that capture attention and convert it into growth.
+           </p>
+           <p className="body text-[var(--dim)] italic">
+             Ajmal Mullapati & Eathen Baby • Co-founders (Equal)
            </p>
         </div>
       </div>
